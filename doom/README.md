@@ -72,6 +72,7 @@ Use the existing isolated Python 3.11 environment and full imported graph.
 
 ```sh
 .venv-neural/bin/python -m pip install -r doom/requirements.txt
+.venv-neural/bin/python -m doom.download_dataset
 .venv-neural/bin/python -m doom.prepare
 .venv-neural/bin/python -m doom.audit_data
 .venv-neural/bin/python -m doom.build_kernel
@@ -80,6 +81,10 @@ Use the existing isolated Python 3.11 environment and full imported graph.
 .venv-neural/bin/python -m doom.server
 ```
 
+`doom.download_dataset` fetches the raw files listed in `doom/datasets.json`
+into `connectome_data/<dataset>/` (gitignored) and verifies them against
+`data-provenance/<dataset>/source.lock.json` when a lock entry exists. Skip it
+if those files are already in place.
 The build helper selects the platform suffix, replaces the library atomically,
 and writes source/binary hashes. The runtime rejects a stale or modified binary.
 On Linux the helper builds `libneural.so`.
