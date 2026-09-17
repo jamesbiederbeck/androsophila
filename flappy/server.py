@@ -7,6 +7,11 @@ sugar reinforcement, observer/spectator camera, or multiple neural models/condit
 -- those are Doom-specific machinery this harness doesn't have yet. Only GET /state
 and /health are exposed. No filesystem, shell, credentials, remote controls, or
 model-mutating endpoint.
+
+Frozen weights throughout -- this is a simulation, not a learning run. See
+flappy/circuit.py for why haltere stimulation is needed for the wing motor
+neurons to spike at all, and why it's scaled by the bird's own fall speed
+rather than held constant.
 """
 import argparse
 import json
@@ -18,6 +23,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from doom.native import NativeBrain
 from doom.server import encoded_frame
+from flappy.circuit import haltere_afferents, haltere_current_for_velocity, wing_motor_readouts
 from flappy.controls import FlapControls
 from flappy.game import Game, FPS
 from vision.retina import BilinearLuminance
@@ -30,7 +36,6 @@ stop = threading.Event()
 def run_loop(args):
     global latest
     try:
-        manifest = json.loads((ROOT / 'outputs/doom' / args.dataset / 'manifest.json').read_text())
         path = ROOT / 'outputs/doom' / args.dataset / 'graph.npz'
         if args.backend == 'gpu':
             from doom.gpu import GPUBrain, GPU_BUILD
@@ -38,7 +43,8 @@ def run_loop(args):
         else:
             from doom.native import BUILD
             brain = NativeBrain(path); build = BUILD
-        controls = FlapControls(manifest['readouts'])
+        haltere = haltere_afferents(brain)
+        controls = FlapControls(wing_motor_readouts(brain))
         game = Game(seed=args.seed)
         retina = BilinearLuminance()
         run_id = str(uuid.uuid4())
@@ -52,9 +58,12 @@ def run_loop(args):
             if obs['finished']:
                 best_score = max(best_score, obs['score'])
                 game.new_episode()
+                obs = game.observation()
             frame = game.pixels()
             light = retina.sample(frame, brain.uv)
-            counts, neural_wall = brain.step(light, duration_ms, sugar=False)
+            current = haltere_current_for_velocity(obs['y_velocity'], gain=args.haltere_gain) if args.haltere_gain else 0.
+            stimulation = (haltere, current) if current > 0 else None
+            counts, neural_wall = brain.step(light, duration_ms, sugar=False, stimulation=stimulation)
             action = controls.decode(counts, duration_ms / 1000)
             game.act(action['flap'])
             total_spikes += int(counts.sum())
@@ -68,6 +77,7 @@ def run_loop(args):
                 'model_revision': build['model_revision'],
                 'frame': encoded_frame(frame), 'flap': action['flap'],
                 'game': obs | {'best_score': best_score},
+                'haltere_current': round(current, 3),
                 'clocks': {
                     'wall_seconds': round(wall_seconds, 3),
                     'neural_seconds': round(brain.sim_ms / 1000, 4),
@@ -114,6 +124,8 @@ def main():
     p.add_argument('--dataset', default='malecns_v1')
     p.add_argument('--seed', type=int, default=41027)
     p.add_argument('--backend', choices=['native', 'gpu'], default='native')
+    p.add_argument('--haltere-gain', type=float, default=10.,
+                    help='mV-equivalent current at terminal fall speed, scaled down for slower falls; 0 disables it')
     args = p.parse_args()
 
     def shutdown_signal(*_): raise KeyboardInterrupt

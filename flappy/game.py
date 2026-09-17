@@ -46,7 +46,11 @@ class Game:
         return float(reward)
 
     def observation(self):
-        return {'episode': self.episode, 'tick': self.tick, 'finished': self._finished, 'score': self._score}
+        # _player_vel_y is a private env attribute (no public accessor exists);
+        # positive = falling, negative = rising, range [PLAYER_MIN_VEL_Y,
+        # PLAYER_MAX_VEL_Y] per flappy_bird_gymnasium.envs.constants.
+        return {'episode': self.episode, 'tick': self.tick, 'finished': self._finished,
+                'score': self._score, 'y_velocity': float(self.env._player_vel_y)}
 
     def close(self):
         self.env.close()
