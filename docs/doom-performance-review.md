@@ -64,6 +64,10 @@ record thread configuration, compare neural traces, and measure stage-level
 timings before adopting it as the public runtime. The sampled retinal equality
 is encouraging but does not substitute for the end-to-end comparison.
 
+A candidate GPU kernel backend was later built, validated, and benchmarked;
+see `docs/doom-gpu-kernel-review.md` — it does not beat the native kernel on
+the hardware tested and is not wired into `doom/server.py`.
+
 ## Path to 30 FPS
 
 - Remove BLAS oversubscription and profile the remaining neural hot paths.

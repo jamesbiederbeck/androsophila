@@ -1,0 +1,19 @@
+{
+  "dataset": "malecns_v1",
+  "ticks": 300,
+  "warmup_ticks": 20,
+  "seed": 0,
+  "neurons": 166700,
+  "edges": 25582938,
+  "hardware": "measured on this host; see docs/doom-gpu-kernel-review.md for GPU/CPU model",
+  "total_wall_seconds": 198.8149,
+  "tics_per_second": 1.509,
+  "speed_multiple_of_normal_35hz": 0.0431,
+  "step_wall_ms": {
+    "median": 662.0752405142412,
+    "mean": 662.172208863,
+    "min": 655.6109259836376,
+    "max": 665.9297831356525,
+    "p95": 664.9729583295994
+  }
+}

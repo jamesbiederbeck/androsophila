@@ -2,9 +2,26 @@
 import numpy as np
 import pytest
 
-@pytest.mark.parametrize('backend', ['dense', 'native'])
+def _to_numpy(x):
+    """GPUBrain keeps v/g device-resident (cupy); other backends are numpy already."""
+    return x.get() if hasattr(x, 'get') else x.copy()
+
+def _gpu_available():
+    try:
+        from doom.gpu import _configure_cuda_env
+        _configure_cuda_env()
+        import cupy
+        return cupy.cuda.runtime.getDeviceCount() > 0
+    except Exception:
+        return False
+
+_BACKENDS = ['dense', 'native', 'gpu']
+
+@pytest.mark.parametrize('backend', _BACKENDS)
 @pytest.mark.parametrize('cadence_ms', [.1,10.])
 def test_kernel_against_brian2_with_refractory_inputs(tmp_path, backend, cadence_ms):
+    if backend == 'gpu' and not _gpu_available():
+        pytest.skip('No cupy/CUDA GPU available for the gpu backend')
     import brian2 as b2
     from doom.engine import Brain
     from doom.native import NativeBrain
@@ -17,7 +34,12 @@ def test_kernel_against_brian2_with_refractory_inputs(tmp_path, backend, cadence
       post=post, weight=w, ids=np.arange(n,dtype=np.int64), retina=np.array([],dtype=np.int32),
       uv=np.empty((0,2),dtype=np.float32), lamina=np.array([0,3],dtype=np.int32),
       sugar=np.array([],dtype=np.int32), superclass=np.array(['test']*n))
-    brain = (Brain if backend == 'dense' else NativeBrain)(path)
+    if backend == 'dense': BrainClass = Brain
+    elif backend == 'native': BrainClass = NativeBrain
+    else:
+        from doom.gpu import GPUBrain
+        BrainClass = GPUBrain
+    brain = BrainClass(path)
     neurons = b2.NeuronGroup(n, '''
       dv/dt = (-52*mV - v + drive + g)/(20*ms) : volt (unless refractory)
       dg/dt = -g/(5*ms) : volt (unless refractory)
@@ -37,7 +59,7 @@ def test_kernel_against_brian2_with_refractory_inputs(tmp_path, backend, cadence
         network.run(milliseconds*b2.ms)
         for _ in range(round(milliseconds/cadence_ms)):
             c,_=brain.step(np.empty(0),cadence_ms,lamina_bias=drive)
-            actual_counts.append(c); actual_v.append(brain.v.copy()); actual_g.append(brain.g.copy())
+            actual_counts.append(c); actual_v.append(_to_numpy(brain.v)); actual_g.append(_to_numpy(brain.g))
     expected_counts = np.zeros((900,n),dtype=int)
     for i,t in zip(spike.i,spike.t/b2.ms): expected_counts[round(float(t)/.1),i]+=1
     stride=round(cadence_ms/.1)
