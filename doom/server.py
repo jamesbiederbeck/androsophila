@@ -42,11 +42,14 @@ def run_loop(args):
                 manifest['readouts'].append({k:r[k] for k in ['index','id','type']}|{'side':r['soma_side']})
             manifest['training']='Experimental v6 plasticity on 4,184 existing KC-to-MBON11 edges; associative learning and survival improvement unvalidated.'
             manifest['visual_dynamics']='R1–R6 luminance and 811 R8 RGB proxies, filtered in <=10 ms bins; inferred projection, simplified spiking physiology; unvalidated.'
-            manifest['additional_R8_inputs']=len(brain.r8)
-        else:brain=NativeBrain(ROOT/'outputs/doom/malecns_v1/graph.npz')
+            manifest['additional_R8_inputs']=len(brain.r8);build=BUILD
+        elif args.backend=='gpu':
+            from doom.gpu import GPUBrain,GPU_BUILD
+            brain=GPUBrain(ROOT/'outputs/doom/malecns_v1/graph.npz');build=GPU_BUILD
+        else:brain=NativeBrain(ROOT/'outputs/doom/malecns_v1/graph.npz');build=BUILD
         phase=('training' if args.learning else 'frozen-control') if training else 'baseline'
         controls=NeuralControls(manifest['readouts'],mode=args.decoder);game=Game(seed=args.seed,scenario=args.scenario,spectator=True)
-        origin=provenance(ROOT/'outputs/doom/malecns_v1/graph.npz',BUILD,game.assets)
+        origin=provenance(ROOT/'outputs/doom/malecns_v1/graph.npz',build,game.assets)
         if training:
             origin['candidate']=candidate_provenance(brain,ROOT)
             origin['model_revision']='adaptive-centered-v6-live-v1'
@@ -249,11 +252,16 @@ def main():
     p.add_argument('--checkpoint-dir');p.add_argument('--resume',action='store_true')
     p.add_argument('--checkpoint-seconds',type=int,default=300)
     p.add_argument('--model',choices=['baseline','experimental-v6'],default='baseline')
+    p.add_argument('--backend',choices=['native','gpu'],default='native',help='gpu requires doom/requirements-gpu.txt and a CUDA GPU; see docs/doom-gpu-kernel-review.md')
     p.add_argument('--learning',action='store_true',help='Enable explicitly unvalidated v6 memory plasticity')
     p.add_argument('--seed',type=int,default=41027);p.add_argument('--reward',choices=['off','sugar'],default='off')
     p.add_argument('--condition',choices=['intact','blank_vision','frozen_vision','retina_disconnected','all_edges_disconnected','controls_clamped'],default='intact')
     args=p.parse_args()
     if args.learning and args.model!='experimental-v6':p.error('Learning requires the explicit experimental-v6 model')
+    if args.backend=='gpu' and args.model!='baseline':p.error('--backend gpu is only implemented for the baseline model')
+    if args.backend=='gpu' and args.condition in ('retina_disconnected','all_edges_disconnected'):
+        p.error('--backend gpu does not support this condition: it mutates brain.weight after construction, '
+                'which GPUBrain has already copied to device memory and will not observe')
     if args.model=='experimental-v6' and (args.condition!='intact' or args.reward!='off' or args.decoder!='bci'):
         p.error('Live candidate requires intact RGB, damage reinforcement only, and the fixed BCI')
     if args.checkpoint_seconds<30:p.error('Checkpoint interval must be at least 30 seconds')
