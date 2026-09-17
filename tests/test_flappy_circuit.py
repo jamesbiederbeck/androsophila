@@ -45,19 +45,25 @@ def test_haltere_afferents_raises_when_absent(monkeypatch):
 
 
 def test_haltere_current_zero_while_rising_or_level():
-    assert haltere_current_for_velocity(-5., gain=10., max_velocity=10.) == 0.
-    assert haltere_current_for_velocity(0., gain=10., max_velocity=10.) == 0.
+    assert haltere_current_for_velocity(-5., m=10., n=1., max_velocity=10.) == 0.
+    assert haltere_current_for_velocity(0., m=10., n=1., max_velocity=10.) == 0.
 
 
-def test_haltere_current_scales_linearly_with_fall_speed():
-    assert haltere_current_for_velocity(5., gain=10., max_velocity=10.) == 5.
-    assert haltere_current_for_velocity(10., gain=10., max_velocity=10.) == 10.
+def test_haltere_current_defaults_to_identity_mapping():
+    assert haltere_current_for_velocity(5.) == 5.
+    assert haltere_current_for_velocity(10.) == 10.
+
+
+def test_haltere_current_applies_power_law():
+    assert haltere_current_for_velocity(5., m=2., n=1., max_velocity=10.) == 10.
+    assert haltere_current_for_velocity(3., m=1., n=2., max_velocity=10.) == 9.
+    assert haltere_current_for_velocity(4., m=2., n=0.5, max_velocity=10.) == 4.
 
 
 def test_haltere_current_clips_above_max_velocity():
-    assert haltere_current_for_velocity(50., gain=10., max_velocity=10.) == 10.
+    assert haltere_current_for_velocity(50., m=1., n=1., max_velocity=10.) == 10.
 
 
 def test_haltere_current_rejects_invalid_max_velocity():
     with pytest.raises(ValueError):
-        haltere_current_for_velocity(5., gain=10., max_velocity=0.)
+        haltere_current_for_velocity(5., m=10., n=1., max_velocity=0.)

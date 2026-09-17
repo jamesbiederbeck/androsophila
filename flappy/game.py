@@ -4,6 +4,7 @@ Mirrors doom/game.py's Game class shape (pixels()/act()/observation()/close()/
 new_episode()) so flappy/play.py can drive the same Brain/NativeBrain/GPUBrain
 without any game-specific code outside this module and vision/retina.py.
 """
+from flappy_bird_gymnasium.envs.constants import PLAYER_HEIGHT, PLAYER_WIDTH
 from flappy_bird_gymnasium.envs.flappy_bird_env import FlappyBirdEnv
 
 # The env's only declared tick-rate signal (metadata['render_fps']); not
@@ -14,8 +15,15 @@ FPS = 30
 
 
 class Game:
-    def __init__(self, seed=41027, score_limit=None):
+    def __init__(self, seed=41027, score_limit=None, no_pipes=False):
         self.env = FlappyBirdEnv(render_mode='rgb_array', use_lidar=False, score_limit=score_limit)
+        if no_pipes:
+            # Park every generated pipe far off both the visible screen and
+            # the collision check, forever, instead of patching the vendored
+            # submodule -- there is no constructor flag for this upstream.
+            # Ground/ceiling boundaries are untouched and still terminate an
+            # episode; only the pipe obstacle is removed.
+            self.env._get_random_pipe = lambda: [{'x': -9999, 'y': -9999}, {'x': -9999, 'y': -9999}]
         self._seed = seed
         self.episode = 0
         self.new_episode()
@@ -46,11 +54,20 @@ class Game:
         return float(reward)
 
     def observation(self):
-        # _player_vel_y is a private env attribute (no public accessor exists);
-        # positive = falling, negative = rising, range [PLAYER_MIN_VEL_Y,
-        # PLAYER_MAX_VEL_Y] per flappy_bird_gymnasium.envs.constants.
+        # _player_y/_player_vel_y/_player_rot are private env attributes (no
+        # public accessor exists); vel_y positive = falling, negative = rising,
+        # range [PLAYER_MIN_VEL_Y, PLAYER_MAX_VEL_Y] per
+        # flappy_bird_gymnasium.envs.constants.
         return {'episode': self.episode, 'tick': self.tick, 'finished': self._finished,
-                'score': self._score, 'y_velocity': float(self.env._player_vel_y)}
+                'score': self._score, 'y_velocity': float(self.env._player_vel_y),
+                'y': float(self.env._player_y), 'rotation': float(self.env._player_rot)}
+
+    def geometry(self):
+        """Fixed screen/sprite dimensions for a coordinate-only renderer (no
+        video frame) to draw the bird itself; static for the env's lifetime."""
+        return {'screen_width': self.env._screen_width, 'screen_height': self.env._screen_height,
+                'ground_y': self.env._ground['y'], 'player_x': self.env._player_x,
+                'player_width': PLAYER_WIDTH, 'player_height': PLAYER_HEIGHT}
 
     def close(self):
         self.env.close()

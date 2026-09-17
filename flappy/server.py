@@ -61,7 +61,7 @@ def run_loop(args):
                 obs = game.observation()
             frame = game.pixels()
             light = retina.sample(frame, brain.uv)
-            current = haltere_current_for_velocity(obs['y_velocity'], gain=args.haltere_gain) if args.haltere_gain else 0.
+            current = haltere_current_for_velocity(obs['y_velocity'], m=args.haltere_gain) if args.haltere_gain else 0.
             stimulation = (haltere, current) if current > 0 else None
             counts, neural_wall = brain.step(light, duration_ms, sugar=False, stimulation=stimulation)
             action = controls.decode(counts, duration_ms / 1000)
@@ -124,8 +124,8 @@ def main():
     p.add_argument('--dataset', default='malecns_v1')
     p.add_argument('--seed', type=int, default=41027)
     p.add_argument('--backend', choices=['native', 'gpu'], default='native')
-    p.add_argument('--haltere-gain', type=float, default=10.,
-                    help='mV-equivalent current at terminal fall speed, scaled down for slower falls; 0 disables it')
+    p.add_argument('--haltere-gain', type=float, default=1.,
+                    help='m in A(dy)=m*dy (n fixed at 1 here); mV-equivalent current per unit fall speed, 0 disables it')
     args = p.parse_args()
 
     def shutdown_signal(*_): raise KeyboardInterrupt

@@ -33,8 +33,10 @@ falling faster raises haltere drive, which raises DLM firing probability,
 which raises flap probability, which slows the fall. This still doesn't
 model what halteres actually sense (angular velocity from wingbeat-driven
 oscillation, not linear descent speed) -- it is a proportional-control
-mapping chosen because the sharp DLM threshold needs *some* graded input to
-turn into graded behavior, not a claim about haltere physiology.
+mapping (a tunable power law, A(dy) = m * dy^n) chosen because the sharp DLM
+threshold needs *some* graded input to turn into graded behavior, not a
+claim about haltere physiology. See flappy/tune_server.py for a live UI
+that adjusts m and n against the running simulation.
 """
 import math
 import numpy as np
@@ -59,12 +61,13 @@ def haltere_afferents(brain):
     return idx.astype(np.int32)
 
 
-def haltere_current_for_velocity(y_velocity, gain=10., max_velocity=PLAYER_MAX_VEL_Y):
-    """0 while level or rising (y_velocity <= 0); scales linearly up to `gain`
-    mV-equivalent at the game's own terminal fall speed. Default gain=10
-    matches the empirically confirmed near-saturating constant current, so a
-    fall at terminal velocity drives roughly the same DLM response a
-    constant 10 mV pulse did; slower falls get proportionally less."""
+def haltere_current_for_velocity(y_velocity, m=1., n=1., max_velocity=PLAYER_MAX_VEL_Y):
+    """A(dy) = m * dy^n, rectified to 0 while level or rising (y_velocity<=0)
+    and clipped to the game's own terminal fall speed before exponentiating
+    (undefined for negative bases at fractional n, unbounded otherwise).
+    Default m=1, n=1 reproduces the earlier confirmed-working mapping
+    (haltere current == fall speed, up to PLAYER_MAX_VEL_Y mV-equivalent)."""
     if not math.isfinite(max_velocity) or max_velocity <= 0: raise ValueError('Positive max_velocity required')
-    if not math.isfinite(y_velocity) or not math.isfinite(gain): raise ValueError('Finite velocity and gain required')
-    return gain * float(np.clip(y_velocity, 0, max_velocity)) / max_velocity
+    if not all(math.isfinite(x) for x in (y_velocity, m, n)): raise ValueError('Finite velocity, m and n required')
+    if y_velocity <= 0: return 0.
+    return m * min(float(y_velocity), max_velocity) ** n
