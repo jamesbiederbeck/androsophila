@@ -72,6 +72,16 @@ follow its build instructions, and run `python -m doom.combat_arena --acc PATH_T
 Preserve the compiler's source notices if redistributing it. It is not required
 at simulation runtime.
 
+## Flappy Bird harness
+
+`flappybird/` is a git submodule of
+[markub3327/flappy-bird-gymnasium](https://github.com/markub3327/flappy-bird-gymnasium)
+(itself adapted from [sourabhv/FlapPyBird](https://github.com/sourabhv/FlapPyBird)),
+copyright Gabriel Nogueira (Talendar) and Martin Kubovcik, MIT licensed per its own
+`LICENSE` file. It is used unmodified as a second, lighter game environment for the
+same connectome simulation (`flappy/`), alongside the existing ViZDoom harness
+(`doom/`). Not affiliated with or endorsed by its original authors.
+
 ## UI and scientific model references
 
 Adapted shadcn/ui components and the viewer's direct package dependencies retain

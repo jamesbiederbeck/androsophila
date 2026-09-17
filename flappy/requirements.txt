@@ -1,0 +1,10 @@
+# Optional: only needed for the flappy/ harness, not doom/'s default path.
+# Verified compatible with this project's numpy==1.24.4 pin (doom/requirements.txt).
+gymnasium==0.29.1
+pygame==2.6.1
+
+# flappy_bird_gymnasium itself is the flappybird/ git submodule, installed
+# editable from the local checkout rather than PyPI:
+#   git submodule update --init flappybird
+#   .venv-neural/bin/python -m uv pip install -e ./flappybird
+# (or: uv pip install --python .venv-neural/bin/python -e ./flappybird)

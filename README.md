@@ -21,6 +21,8 @@ The wiring comes from a biological reconstruction. The dynamics, retinal interfa
 | `doom/` | Whole-graph simulator, native kernel, ViZDoom interface, arena and broadcaster |
 | `doom_learning/`, `doom_learning_v2/` … `doom_learning_v6/` | Conditioning, plasticity candidates and controlled learning experiments |
 | `doom-ui/` | Monochrome spectator website, live telemetry, learning and methods pages |
+| `vision/` | Game-agnostic photoreceptor-sampling interface shared by `doom/` and `flappy/` |
+| `flappy/`, `flappybird/` | Second, lighter game harness (Flappy Bird Gymnasium submodule) driving the same connectome simulation |
 | `doom/connectome.py`, `doom/datasets.json` | MaleCNS importer and exact input registry |
 | `tests/` | Neural, numerical, game, reinforcement and checkpoint checks |
 | `docs/`, `outputs/`, `data-provenance/` | Scientific reviews, compact evidence, source snapshots and dataset hashes |
