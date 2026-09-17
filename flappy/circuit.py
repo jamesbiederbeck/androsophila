@@ -61,12 +61,14 @@ def haltere_afferents(brain):
     return idx.astype(np.int32)
 
 
-def haltere_current_for_velocity(y_velocity, m=1., n=1., max_velocity=PLAYER_MAX_VEL_Y):
+def haltere_current_for_velocity(y_velocity, m=1.75, n=2., max_velocity=PLAYER_MAX_VEL_Y):
     """A(dy) = m * dy^n, rectified to 0 while level or rising (y_velocity<=0)
     and clipped to the game's own terminal fall speed before exponentiating
     (undefined for negative bases at fractional n, unbounded otherwise).
-    Default m=1, n=1 reproduces the earlier confirmed-working mapping
-    (haltere current == fall speed, up to PLAYER_MAX_VEL_Y mV-equivalent)."""
+    Default m=1.75, n=2 chosen via interactive search in
+    flappy/tune_server.py, superseding the earlier linear m=1, n=1 baseline
+    that just matched a constant-current test; neither is derived from
+    anything but this harness's own runs."""
     if not math.isfinite(max_velocity) or max_velocity <= 0: raise ValueError('Positive max_velocity required')
     if not all(math.isfinite(x) for x in (y_velocity, m, n)): raise ValueError('Finite velocity, m and n required')
     if y_velocity <= 0: return 0.

@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parents[1]
 latest = {'status': 'starting', 'generated_at_ms': 0}
 # Plain dict item assignment/read is atomic under the GIL, same convention
 # doom/server.py and flappy/server.py already rely on for `latest`.
-params = {'m': 1.0, 'n': 1.0}
+params = {'m': 1.75, 'n': 2.0}
 PARAM_BOUNDS = {'m': (0., 10.), 'n': (0.1, 4.)}
 stop = threading.Event()
 reset_requested = threading.Event()
@@ -136,10 +136,10 @@ button:active{background:#555}
 <h1>Haltere activation tuner</h1>
 <div class="formula" id="formula">A(&Delta;y) = m &middot; &Delta;y&#8319;</div>
 <label>m (gain) = <span class="val" id="mval"></span>
-  <input type="range" id="m" min="0" max="10" step="0.05" value="1">
+  <input type="range" id="m" min="0" max="10" step="0.05" value="1.75">
 </label>
 <label>n (exponent) = <span class="val" id="nval"></span>
-  <input type="range" id="n" min="0.1" max="4" step="0.05" value="1">
+  <input type="range" id="n" min="0.1" max="4" step="0.05" value="2">
 </label>
 <button id="resetBtn">Reset position / velocity</button>
 <hr style="border-color:#333;margin-top:18px">
@@ -200,6 +200,7 @@ async function poll() {
     draw(s);
   } catch (e) { $('status').textContent = 'disconnected'; }
 }
+pushParams();
 setInterval(poll, 150);
 poll();
 </script>

@@ -49,9 +49,9 @@ def test_haltere_current_zero_while_rising_or_level():
     assert haltere_current_for_velocity(0., m=10., n=1., max_velocity=10.) == 0.
 
 
-def test_haltere_current_defaults_to_identity_mapping():
-    assert haltere_current_for_velocity(5.) == 5.
-    assert haltere_current_for_velocity(10.) == 10.
+def test_haltere_current_defaults_to_1_75_dy_squared():
+    assert haltere_current_for_velocity(5.) == 1.75 * 25.
+    assert haltere_current_for_velocity(0.) == 0.
 
 
 def test_haltere_current_applies_power_law():
