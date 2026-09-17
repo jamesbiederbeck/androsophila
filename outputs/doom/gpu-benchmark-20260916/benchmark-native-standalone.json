@@ -1,0 +1,17 @@
+{
+  "dataset": "malecns_v1",
+  "ticks": 300,
+  "warmup_ticks": 20,
+  "seed": 0,
+  "backend": "NativeBrain",
+  "note": "Measured with the identical standalone harness/workload as benchmark-event-driven.json (synthetic uniform-random luminance, no doom.server/ViZDoom/broadcast), for an apples-to-apples comparison. The previously reported ~13-15 tics/sec figure in docs/doom-performance-review.md came from the full doom.server/run_broadcast.sh pipeline (ViZDoom stepping, rendering, retina sampling, broadcast included), not this harness -- do not compare that number directly to benchmark-event-driven.json.",
+  "tics_per_second": 18.347,
+  "speed_multiple_of_normal_35hz": 0.5242,
+  "step_wall_ms": {
+    "median": 53.519,
+    "mean": 54.085,
+    "min": 51.533,
+    "max": 60.926,
+    "p95": 58.273
+  }
+}

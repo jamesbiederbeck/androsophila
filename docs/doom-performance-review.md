@@ -65,8 +65,11 @@ timings before adopting it as the public runtime. The sampled retinal equality
 is encouraging but does not substitute for the end-to-end comparison.
 
 A candidate GPU kernel backend was later built, validated, and benchmarked;
-see `docs/doom-gpu-kernel-review.md` — it does not beat the native kernel on
-the hardware tested and is not wired into `doom/server.py`.
+see `docs/doom-gpu-kernel-review.md`. An initial dense-every-substep design
+did not beat the native kernel (bandwidth-bound); a later event-driven
+redesign measures ~3.5x faster than the native kernel on an identical
+standalone harness with synthetic input (not yet measured on realistic
+game input). Neither is wired into `doom/server.py`.
 
 ## Path to 30 FPS
 

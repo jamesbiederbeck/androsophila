@@ -1,0 +1,1824 @@
+{
+  "dataset": "malecns_v1",
+  "ticks": 200,
+  "seed": 0,
+  "neurons": 166700,
+  "simulated_ms": 5714.300000000008,
+  "spike_count_mismatch_neurons": 4829,
+  "spike_count_total": {
+    "native": 3569182,
+    "gpu": 3568496
+  },
+  "spike_count_max_abs_diff": 22,
+  "near_threshold_epsilon_mv": 0.001,
+  "near_threshold_events_total": {
+    "native": 268,
+    "gpu": 260
+  },
+  "first_mismatch_tick": 3,
+  "final_voltage_max_abs_diff_mv": 9.50262451171875,
+  "final_conductance_max_abs_diff_mv": 69.93997192382812,
+  "history": [
+    {
+      "tick": 1,
+      "cumulative_mismatched_neurons": 0,
+      "near_threshold_events_this_tick": {
+        "native": 9,
+        "gpu": 9
+      },
+      "voltage_max_abs_diff_mv": 0.00028228759765625
+    },
+    {
+      "tick": 2,
+      "cumulative_mismatched_neurons": 0,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 0.052814483642578125
+    },
+    {
+      "tick": 3,
+      "cumulative_mismatched_neurons": 1,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 2.8960227966308594
+    },
+    {
+      "tick": 4,
+      "cumulative_mismatched_neurons": 3,
+      "near_threshold_events_this_tick": {
+        "native": 4,
+        "gpu": 4
+      },
+      "voltage_max_abs_diff_mv": 6.980976104736328
+    },
+    {
+      "tick": 5,
+      "cumulative_mismatched_neurons": 47,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 6.999904632568359
+    },
+    {
+      "tick": 6,
+      "cumulative_mismatched_neurons": 172,
+      "near_threshold_events_this_tick": {
+        "native": 4,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 8.92510986328125
+    },
+    {
+      "tick": 7,
+      "cumulative_mismatched_neurons": 302,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 7.669475555419922
+    },
+    {
+      "tick": 8,
+      "cumulative_mismatched_neurons": 639,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.232330322265625
+    },
+    {
+      "tick": 9,
+      "cumulative_mismatched_neurons": 783,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 9.891197204589844
+    },
+    {
+      "tick": 10,
+      "cumulative_mismatched_neurons": 1129,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.818038940429688
+    },
+    {
+      "tick": 11,
+      "cumulative_mismatched_neurons": 1188,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.436630249023438
+    },
+    {
+      "tick": 12,
+      "cumulative_mismatched_neurons": 1552,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.748729705810547
+    },
+    {
+      "tick": 13,
+      "cumulative_mismatched_neurons": 1561,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 8.369071960449219
+    },
+    {
+      "tick": 14,
+      "cumulative_mismatched_neurons": 1829,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.25204086303711
+    },
+    {
+      "tick": 15,
+      "cumulative_mismatched_neurons": 1888,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.947647094726562
+    },
+    {
+      "tick": 16,
+      "cumulative_mismatched_neurons": 2000,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 9.623294830322266
+    },
+    {
+      "tick": 17,
+      "cumulative_mismatched_neurons": 2016,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.650535583496094
+    },
+    {
+      "tick": 18,
+      "cumulative_mismatched_neurons": 2130,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.482612609863281
+    },
+    {
+      "tick": 19,
+      "cumulative_mismatched_neurons": 2275,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.734237670898438
+    },
+    {
+      "tick": 20,
+      "cumulative_mismatched_neurons": 2372,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.308147430419922
+    },
+    {
+      "tick": 21,
+      "cumulative_mismatched_neurons": 2448,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 8.828235626220703
+    },
+    {
+      "tick": 22,
+      "cumulative_mismatched_neurons": 2541,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 15.869693756103516
+    },
+    {
+      "tick": 23,
+      "cumulative_mismatched_neurons": 2554,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.343124389648438
+    },
+    {
+      "tick": 24,
+      "cumulative_mismatched_neurons": 2611,
+      "near_threshold_events_this_tick": {
+        "native": 4,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.634536743164062
+    },
+    {
+      "tick": 25,
+      "cumulative_mismatched_neurons": 2593,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.624221801757812
+    },
+    {
+      "tick": 26,
+      "cumulative_mismatched_neurons": 2746,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.164257049560547
+    },
+    {
+      "tick": 27,
+      "cumulative_mismatched_neurons": 2765,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.20376205444336
+    },
+    {
+      "tick": 28,
+      "cumulative_mismatched_neurons": 2782,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.764766693115234
+    },
+    {
+      "tick": 29,
+      "cumulative_mismatched_neurons": 2818,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.122478485107422
+    },
+    {
+      "tick": 30,
+      "cumulative_mismatched_neurons": 2853,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.033306121826172
+    },
+    {
+      "tick": 31,
+      "cumulative_mismatched_neurons": 2939,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 10.8736572265625
+    },
+    {
+      "tick": 32,
+      "cumulative_mismatched_neurons": 2992,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.831439971923828
+    },
+    {
+      "tick": 33,
+      "cumulative_mismatched_neurons": 3043,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.007083892822266
+    },
+    {
+      "tick": 34,
+      "cumulative_mismatched_neurons": 3049,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 14.35958480834961
+    },
+    {
+      "tick": 35,
+      "cumulative_mismatched_neurons": 3120,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 13.114521026611328
+    },
+    {
+      "tick": 36,
+      "cumulative_mismatched_neurons": 3119,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.171821594238281
+    },
+    {
+      "tick": 37,
+      "cumulative_mismatched_neurons": 3143,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.51919937133789
+    },
+    {
+      "tick": 38,
+      "cumulative_mismatched_neurons": 3186,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.372810363769531
+    },
+    {
+      "tick": 39,
+      "cumulative_mismatched_neurons": 3257,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 11.565109252929688
+    },
+    {
+      "tick": 40,
+      "cumulative_mismatched_neurons": 3286,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.410831451416016
+    },
+    {
+      "tick": 41,
+      "cumulative_mismatched_neurons": 3262,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.287506103515625
+    },
+    {
+      "tick": 42,
+      "cumulative_mismatched_neurons": 3339,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.38031005859375
+    },
+    {
+      "tick": 43,
+      "cumulative_mismatched_neurons": 3363,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 17.822891235351562
+    },
+    {
+      "tick": 44,
+      "cumulative_mismatched_neurons": 3422,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.210941314697266
+    },
+    {
+      "tick": 45,
+      "cumulative_mismatched_neurons": 3425,
+      "near_threshold_events_this_tick": {
+        "native": 4,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.737354278564453
+    },
+    {
+      "tick": 46,
+      "cumulative_mismatched_neurons": 3480,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.382781982421875
+    },
+    {
+      "tick": 47,
+      "cumulative_mismatched_neurons": 3438,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 4
+      },
+      "voltage_max_abs_diff_mv": 10.926467895507812
+    },
+    {
+      "tick": 48,
+      "cumulative_mismatched_neurons": 3515,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.258720397949219
+    },
+    {
+      "tick": 49,
+      "cumulative_mismatched_neurons": 3507,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.486854553222656
+    },
+    {
+      "tick": 50,
+      "cumulative_mismatched_neurons": 3516,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 9.725025177001953
+    },
+    {
+      "tick": 51,
+      "cumulative_mismatched_neurons": 3522,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 9.964546203613281
+    },
+    {
+      "tick": 52,
+      "cumulative_mismatched_neurons": 3636,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.426124572753906
+    },
+    {
+      "tick": 53,
+      "cumulative_mismatched_neurons": 3632,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.291542053222656
+    },
+    {
+      "tick": 54,
+      "cumulative_mismatched_neurons": 3646,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.939453125
+    },
+    {
+      "tick": 55,
+      "cumulative_mismatched_neurons": 3665,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 14.253646850585938
+    },
+    {
+      "tick": 56,
+      "cumulative_mismatched_neurons": 3653,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 8.752277374267578
+    },
+    {
+      "tick": 57,
+      "cumulative_mismatched_neurons": 3697,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.106575012207031
+    },
+    {
+      "tick": 58,
+      "cumulative_mismatched_neurons": 3727,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.370864868164062
+    },
+    {
+      "tick": 59,
+      "cumulative_mismatched_neurons": 3726,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 8.441085815429688
+    },
+    {
+      "tick": 60,
+      "cumulative_mismatched_neurons": 3697,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.253292083740234
+    },
+    {
+      "tick": 61,
+      "cumulative_mismatched_neurons": 3755,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.058696746826172
+    },
+    {
+      "tick": 62,
+      "cumulative_mismatched_neurons": 3681,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.913700103759766
+    },
+    {
+      "tick": 63,
+      "cumulative_mismatched_neurons": 3709,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.960155487060547
+    },
+    {
+      "tick": 64,
+      "cumulative_mismatched_neurons": 3755,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 14.701160430908203
+    },
+    {
+      "tick": 65,
+      "cumulative_mismatched_neurons": 3862,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 21.377887725830078
+    },
+    {
+      "tick": 66,
+      "cumulative_mismatched_neurons": 3893,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 13.377532958984375
+    },
+    {
+      "tick": 67,
+      "cumulative_mismatched_neurons": 3898,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.926372528076172
+    },
+    {
+      "tick": 68,
+      "cumulative_mismatched_neurons": 3876,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.562309265136719
+    },
+    {
+      "tick": 69,
+      "cumulative_mismatched_neurons": 3862,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.592643737792969
+    },
+    {
+      "tick": 70,
+      "cumulative_mismatched_neurons": 3888,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.842864990234375
+    },
+    {
+      "tick": 71,
+      "cumulative_mismatched_neurons": 3885,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.462451934814453
+    },
+    {
+      "tick": 72,
+      "cumulative_mismatched_neurons": 3937,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.685802459716797
+    },
+    {
+      "tick": 73,
+      "cumulative_mismatched_neurons": 3959,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 14.715202331542969
+    },
+    {
+      "tick": 74,
+      "cumulative_mismatched_neurons": 3987,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.812957763671875
+    },
+    {
+      "tick": 75,
+      "cumulative_mismatched_neurons": 3918,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.127193450927734
+    },
+    {
+      "tick": 76,
+      "cumulative_mismatched_neurons": 3915,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 10.991451263427734
+    },
+    {
+      "tick": 77,
+      "cumulative_mismatched_neurons": 3883,
+      "near_threshold_events_this_tick": {
+        "native": 5,
+        "gpu": 5
+      },
+      "voltage_max_abs_diff_mv": 12.785713195800781
+    },
+    {
+      "tick": 78,
+      "cumulative_mismatched_neurons": 3957,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.010005950927734
+    },
+    {
+      "tick": 79,
+      "cumulative_mismatched_neurons": 3964,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 13.575447082519531
+    },
+    {
+      "tick": 80,
+      "cumulative_mismatched_neurons": 3959,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.279006958007812
+    },
+    {
+      "tick": 81,
+      "cumulative_mismatched_neurons": 4024,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.879657745361328
+    },
+    {
+      "tick": 82,
+      "cumulative_mismatched_neurons": 3991,
+      "near_threshold_events_this_tick": {
+        "native": 4,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 14.553985595703125
+    },
+    {
+      "tick": 83,
+      "cumulative_mismatched_neurons": 4108,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.46445083618164
+    },
+    {
+      "tick": 84,
+      "cumulative_mismatched_neurons": 4088,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 13.086227416992188
+    },
+    {
+      "tick": 85,
+      "cumulative_mismatched_neurons": 4080,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 10.013736724853516
+    },
+    {
+      "tick": 86,
+      "cumulative_mismatched_neurons": 4056,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 13.891006469726562
+    },
+    {
+      "tick": 87,
+      "cumulative_mismatched_neurons": 4038,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.577232360839844
+    },
+    {
+      "tick": 88,
+      "cumulative_mismatched_neurons": 4031,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.312068939208984
+    },
+    {
+      "tick": 89,
+      "cumulative_mismatched_neurons": 4059,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.532413482666016
+    },
+    {
+      "tick": 90,
+      "cumulative_mismatched_neurons": 4114,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 13.445308685302734
+    },
+    {
+      "tick": 91,
+      "cumulative_mismatched_neurons": 4181,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 7.774860382080078
+    },
+    {
+      "tick": 92,
+      "cumulative_mismatched_neurons": 4162,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 4
+      },
+      "voltage_max_abs_diff_mv": 8.160720825195312
+    },
+    {
+      "tick": 93,
+      "cumulative_mismatched_neurons": 4218,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.808422088623047
+    },
+    {
+      "tick": 94,
+      "cumulative_mismatched_neurons": 4203,
+      "near_threshold_events_this_tick": {
+        "native": 5,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.042705535888672
+    },
+    {
+      "tick": 95,
+      "cumulative_mismatched_neurons": 4185,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.927730560302734
+    },
+    {
+      "tick": 96,
+      "cumulative_mismatched_neurons": 4195,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.102874755859375
+    },
+    {
+      "tick": 97,
+      "cumulative_mismatched_neurons": 4212,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 11.896442413330078
+    },
+    {
+      "tick": 98,
+      "cumulative_mismatched_neurons": 4236,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.561145782470703
+    },
+    {
+      "tick": 99,
+      "cumulative_mismatched_neurons": 4197,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.872383117675781
+    },
+    {
+      "tick": 100,
+      "cumulative_mismatched_neurons": 4245,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.20273208618164
+    },
+    {
+      "tick": 101,
+      "cumulative_mismatched_neurons": 4226,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 11.781131744384766
+    },
+    {
+      "tick": 102,
+      "cumulative_mismatched_neurons": 4248,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.07979965209961
+    },
+    {
+      "tick": 103,
+      "cumulative_mismatched_neurons": 4241,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.462516784667969
+    },
+    {
+      "tick": 104,
+      "cumulative_mismatched_neurons": 4219,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 11.317974090576172
+    },
+    {
+      "tick": 105,
+      "cumulative_mismatched_neurons": 4228,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.21908187866211
+    },
+    {
+      "tick": 106,
+      "cumulative_mismatched_neurons": 4273,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.757816314697266
+    },
+    {
+      "tick": 107,
+      "cumulative_mismatched_neurons": 4338,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 9.317901611328125
+    },
+    {
+      "tick": 108,
+      "cumulative_mismatched_neurons": 4313,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.97119140625
+    },
+    {
+      "tick": 109,
+      "cumulative_mismatched_neurons": 4305,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.204460144042969
+    },
+    {
+      "tick": 110,
+      "cumulative_mismatched_neurons": 4341,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 15.418659210205078
+    },
+    {
+      "tick": 111,
+      "cumulative_mismatched_neurons": 4337,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.025379180908203
+    },
+    {
+      "tick": 112,
+      "cumulative_mismatched_neurons": 4319,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 4
+      },
+      "voltage_max_abs_diff_mv": 10.514701843261719
+    },
+    {
+      "tick": 113,
+      "cumulative_mismatched_neurons": 4294,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 13.321197509765625
+    },
+    {
+      "tick": 114,
+      "cumulative_mismatched_neurons": 4298,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.0302734375
+    },
+    {
+      "tick": 115,
+      "cumulative_mismatched_neurons": 4321,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 10.829517364501953
+    },
+    {
+      "tick": 116,
+      "cumulative_mismatched_neurons": 4385,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 8.576915740966797
+    },
+    {
+      "tick": 117,
+      "cumulative_mismatched_neurons": 4349,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 10.129852294921875
+    },
+    {
+      "tick": 118,
+      "cumulative_mismatched_neurons": 4372,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 16.53061294555664
+    },
+    {
+      "tick": 119,
+      "cumulative_mismatched_neurons": 4379,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.690349578857422
+    },
+    {
+      "tick": 120,
+      "cumulative_mismatched_neurons": 4428,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 10.037986755371094
+    },
+    {
+      "tick": 121,
+      "cumulative_mismatched_neurons": 4463,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 16.610946655273438
+    },
+    {
+      "tick": 122,
+      "cumulative_mismatched_neurons": 4391,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.536956787109375
+    },
+    {
+      "tick": 123,
+      "cumulative_mismatched_neurons": 4400,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.870841979980469
+    },
+    {
+      "tick": 124,
+      "cumulative_mismatched_neurons": 4428,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.913921356201172
+    },
+    {
+      "tick": 125,
+      "cumulative_mismatched_neurons": 4425,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.771427154541016
+    },
+    {
+      "tick": 126,
+      "cumulative_mismatched_neurons": 4441,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 17.28357696533203
+    },
+    {
+      "tick": 127,
+      "cumulative_mismatched_neurons": 4449,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 10.009090423583984
+    },
+    {
+      "tick": 128,
+      "cumulative_mismatched_neurons": 4481,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.571197509765625
+    },
+    {
+      "tick": 129,
+      "cumulative_mismatched_neurons": 4483,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.3646240234375
+    },
+    {
+      "tick": 130,
+      "cumulative_mismatched_neurons": 4430,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 7.991359710693359
+    },
+    {
+      "tick": 131,
+      "cumulative_mismatched_neurons": 4509,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.602821350097656
+    },
+    {
+      "tick": 132,
+      "cumulative_mismatched_neurons": 4479,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.921165466308594
+    },
+    {
+      "tick": 133,
+      "cumulative_mismatched_neurons": 4545,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.706989288330078
+    },
+    {
+      "tick": 134,
+      "cumulative_mismatched_neurons": 4501,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.501976013183594
+    },
+    {
+      "tick": 135,
+      "cumulative_mismatched_neurons": 4541,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 10.554203033447266
+    },
+    {
+      "tick": 136,
+      "cumulative_mismatched_neurons": 4536,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.001941680908203
+    },
+    {
+      "tick": 137,
+      "cumulative_mismatched_neurons": 4522,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.101310729980469
+    },
+    {
+      "tick": 138,
+      "cumulative_mismatched_neurons": 4529,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 13.099079132080078
+    },
+    {
+      "tick": 139,
+      "cumulative_mismatched_neurons": 4509,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.41727066040039
+    },
+    {
+      "tick": 140,
+      "cumulative_mismatched_neurons": 4516,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.647716522216797
+    },
+    {
+      "tick": 141,
+      "cumulative_mismatched_neurons": 4504,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.85788345336914
+    },
+    {
+      "tick": 142,
+      "cumulative_mismatched_neurons": 4520,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.243972778320312
+    },
+    {
+      "tick": 143,
+      "cumulative_mismatched_neurons": 4581,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.673526763916016
+    },
+    {
+      "tick": 144,
+      "cumulative_mismatched_neurons": 4560,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.715827941894531
+    },
+    {
+      "tick": 145,
+      "cumulative_mismatched_neurons": 4542,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.157901763916016
+    },
+    {
+      "tick": 146,
+      "cumulative_mismatched_neurons": 4611,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 13.182750701904297
+    },
+    {
+      "tick": 147,
+      "cumulative_mismatched_neurons": 4588,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 7.954807281494141
+    },
+    {
+      "tick": 148,
+      "cumulative_mismatched_neurons": 4566,
+      "near_threshold_events_this_tick": {
+        "native": 4,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.712261199951172
+    },
+    {
+      "tick": 149,
+      "cumulative_mismatched_neurons": 4553,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.923721313476562
+    },
+    {
+      "tick": 150,
+      "cumulative_mismatched_neurons": 4577,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.078022003173828
+    },
+    {
+      "tick": 151,
+      "cumulative_mismatched_neurons": 4614,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.320343017578125
+    },
+    {
+      "tick": 152,
+      "cumulative_mismatched_neurons": 4607,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 11.069564819335938
+    },
+    {
+      "tick": 153,
+      "cumulative_mismatched_neurons": 4624,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 13.810760498046875
+    },
+    {
+      "tick": 154,
+      "cumulative_mismatched_neurons": 4636,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 15.719253540039062
+    },
+    {
+      "tick": 155,
+      "cumulative_mismatched_neurons": 4658,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.88491439819336
+    },
+    {
+      "tick": 156,
+      "cumulative_mismatched_neurons": 4628,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 8.949634552001953
+    },
+    {
+      "tick": 157,
+      "cumulative_mismatched_neurons": 4572,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 11.101638793945312
+    },
+    {
+      "tick": 158,
+      "cumulative_mismatched_neurons": 4611,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.749946594238281
+    },
+    {
+      "tick": 159,
+      "cumulative_mismatched_neurons": 4639,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 14.531604766845703
+    },
+    {
+      "tick": 160,
+      "cumulative_mismatched_neurons": 4653,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.983257293701172
+    },
+    {
+      "tick": 161,
+      "cumulative_mismatched_neurons": 4641,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 8.355491638183594
+    },
+    {
+      "tick": 162,
+      "cumulative_mismatched_neurons": 4629,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 17.858959197998047
+    },
+    {
+      "tick": 163,
+      "cumulative_mismatched_neurons": 4644,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.555217742919922
+    },
+    {
+      "tick": 164,
+      "cumulative_mismatched_neurons": 4644,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 13.442070007324219
+    },
+    {
+      "tick": 165,
+      "cumulative_mismatched_neurons": 4693,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.713523864746094
+    },
+    {
+      "tick": 166,
+      "cumulative_mismatched_neurons": 4654,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 13.087715148925781
+    },
+    {
+      "tick": 167,
+      "cumulative_mismatched_neurons": 4630,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.167240142822266
+    },
+    {
+      "tick": 168,
+      "cumulative_mismatched_neurons": 4652,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 9.437477111816406
+    },
+    {
+      "tick": 169,
+      "cumulative_mismatched_neurons": 4696,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 12.158626556396484
+    },
+    {
+      "tick": 170,
+      "cumulative_mismatched_neurons": 4694,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.990825653076172
+    },
+    {
+      "tick": 171,
+      "cumulative_mismatched_neurons": 4707,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 14.410850524902344
+    },
+    {
+      "tick": 172,
+      "cumulative_mismatched_neurons": 4713,
+      "near_threshold_events_this_tick": {
+        "native": 3,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 11.967658996582031
+    },
+    {
+      "tick": 173,
+      "cumulative_mismatched_neurons": 4737,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.378986358642578
+    },
+    {
+      "tick": 174,
+      "cumulative_mismatched_neurons": 4708,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.6571044921875
+    },
+    {
+      "tick": 175,
+      "cumulative_mismatched_neurons": 4690,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.581119537353516
+    },
+    {
+      "tick": 176,
+      "cumulative_mismatched_neurons": 4722,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.627944946289062
+    },
+    {
+      "tick": 177,
+      "cumulative_mismatched_neurons": 4720,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.979774475097656
+    },
+    {
+      "tick": 178,
+      "cumulative_mismatched_neurons": 4748,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 12.385753631591797
+    },
+    {
+      "tick": 179,
+      "cumulative_mismatched_neurons": 4781,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 4
+      },
+      "voltage_max_abs_diff_mv": 8.884613037109375
+    },
+    {
+      "tick": 180,
+      "cumulative_mismatched_neurons": 4805,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.05068588256836
+    },
+    {
+      "tick": 181,
+      "cumulative_mismatched_neurons": 4785,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 16.55356216430664
+    },
+    {
+      "tick": 182,
+      "cumulative_mismatched_neurons": 4708,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.19345474243164
+    },
+    {
+      "tick": 183,
+      "cumulative_mismatched_neurons": 4719,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.097118377685547
+    },
+    {
+      "tick": 184,
+      "cumulative_mismatched_neurons": 4741,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 9.943836212158203
+    },
+    {
+      "tick": 185,
+      "cumulative_mismatched_neurons": 4718,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 13.322540283203125
+    },
+    {
+      "tick": 186,
+      "cumulative_mismatched_neurons": 4710,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 11.732398986816406
+    },
+    {
+      "tick": 187,
+      "cumulative_mismatched_neurons": 4703,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.828453063964844
+    },
+    {
+      "tick": 188,
+      "cumulative_mismatched_neurons": 4787,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 12.214874267578125
+    },
+    {
+      "tick": 189,
+      "cumulative_mismatched_neurons": 4800,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.348976135253906
+    },
+    {
+      "tick": 190,
+      "cumulative_mismatched_neurons": 4852,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.419937133789062
+    },
+    {
+      "tick": 191,
+      "cumulative_mismatched_neurons": 4811,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 9.353202819824219
+    },
+    {
+      "tick": 192,
+      "cumulative_mismatched_neurons": 4770,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.823577880859375
+    },
+    {
+      "tick": 193,
+      "cumulative_mismatched_neurons": 4748,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 10.8204345703125
+    },
+    {
+      "tick": 194,
+      "cumulative_mismatched_neurons": 4781,
+      "near_threshold_events_this_tick": {
+        "native": 0,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 13.328498840332031
+    },
+    {
+      "tick": 195,
+      "cumulative_mismatched_neurons": 4761,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.098365783691406
+    },
+    {
+      "tick": 196,
+      "cumulative_mismatched_neurons": 4798,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 4
+      },
+      "voltage_max_abs_diff_mv": 15.564811706542969
+    },
+    {
+      "tick": 197,
+      "cumulative_mismatched_neurons": 4816,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 2
+      },
+      "voltage_max_abs_diff_mv": 12.532875061035156
+    },
+    {
+      "tick": 198,
+      "cumulative_mismatched_neurons": 4855,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 0
+      },
+      "voltage_max_abs_diff_mv": 10.08514404296875
+    },
+    {
+      "tick": 199,
+      "cumulative_mismatched_neurons": 4776,
+      "near_threshold_events_this_tick": {
+        "native": 2,
+        "gpu": 1
+      },
+      "voltage_max_abs_diff_mv": 7.590061187744141
+    },
+    {
+      "tick": 200,
+      "cumulative_mismatched_neurons": 4829,
+      "near_threshold_events_this_tick": {
+        "native": 1,
+        "gpu": 3
+      },
+      "voltage_max_abs_diff_mv": 9.50262451171875
+    }
+  ],
+  "wall_seconds": 15.274
+}

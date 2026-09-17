@@ -1,0 +1,22 @@
+{
+  "ticks": 300,
+  "neurons": 166700,
+  "workload": "captured real ViZDoom closed-loop gameplay, replayed identically into both backends",
+  "capture_file": "outputs/doom/gpu-benchmark-20260916/organic-capture-combat_survival.npz",
+  "nonzero_luminance_fraction": 0.8584967516241879,
+  "native": {
+    "tics_per_second": 18.743,
+    "total_wall_seconds": 16.0063,
+    "step_wall_ms_median": 52.24768596235663,
+    "spike_count_total": 4604627
+  },
+  "gpu_event_driven": {
+    "tics_per_second": 60.762,
+    "total_wall_seconds": 4.9373,
+    "step_wall_ms_median": 14.752050046809018,
+    "spike_count_total": 4604384
+  },
+  "speedup_gpu_over_native": 3.242,
+  "spike_count_mismatch_neurons": 5842,
+  "spike_count_relative_diff": 5.3e-05
+}
