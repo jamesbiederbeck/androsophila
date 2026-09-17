@@ -13,8 +13,10 @@ draws its own canvas sprite client-side, unlike doom/server.py and
 flappy/server.py's base64 JPEG frame.
 
 Frozen weights throughout -- still a simulation, not a learning run. Only
-GET is exposed (including /params, which is a bounded, in-memory numeric
-knob -- not a filesystem, shell, credential, or model-mutating endpoint).
+GET is exposed: /params (a bounded, in-memory numeric knob) and /reset
+(forces a fresh episode -- position/velocity reset -- on the next tick,
+without waiting for a crash) are the only mutating endpoints, and neither
+touches a filesystem, shell, credential, or the model itself.
 """
 import argparse
 import json
@@ -38,6 +40,7 @@ latest = {'status': 'starting', 'generated_at_ms': 0}
 params = {'m': 1.0, 'n': 1.0}
 PARAM_BOUNDS = {'m': (0., 10.), 'n': (0.1, 4.)}
 stop = threading.Event()
+reset_requested = threading.Event()
 
 
 def run_loop(args):
@@ -64,9 +67,10 @@ def run_loop(args):
         print(json.dumps({'status': 'running', 'run_id': run_id, 'port': args.port}), flush=True)
         while not stop.is_set():
             obs = game.observation()
-            if obs['finished']:
+            if obs['finished'] or reset_requested.is_set():
                 best_survival = max(best_survival, obs['tick'])
                 game.new_episode()
+                reset_requested.clear()
                 obs = game.observation()
             frame = game.pixels()
             light = retina.sample(frame, brain.uv)
@@ -122,6 +126,9 @@ input[type=range]{width:100%}
 .flap{color:#ff7}
 h1{font-size:16px;margin:0 0 4px}
 .formula{font-family:monospace;color:#7fd;font-size:14px}
+button{margin-top:14px;padding:8px 14px;font-size:13px;background:#333;color:#eee;border:1px solid #555;border-radius:4px;cursor:pointer}
+button:hover{background:#444}
+button:active{background:#555}
 </style></head>
 <body>
 <canvas id="c" width="288" height="512"></canvas>
@@ -134,6 +141,7 @@ h1{font-size:16px;margin:0 0 4px}
 <label>n (exponent) = <span class="val" id="nval"></span>
   <input type="range" id="n" min="0.1" max="4" step="0.05" value="1">
 </label>
+<button id="resetBtn">Reset position / velocity</button>
 <hr style="border-color:#333;margin-top:18px">
 <div class="stat" id="status">connecting...</div>
 <div class="stat">tick: <span id="tick"></span> &nbsp; episode: <span id="episode"></span></div>
@@ -158,6 +166,7 @@ function pushParams() {
   pending = setTimeout(() => fetch(`/params?m=${m}&n=${n}`), 80);
 }
 $('m').oninput = pushParams; $('n').oninput = pushParams;
+$('resetBtn').onclick = () => fetch('/reset');
 
 function draw(s) {
   const g = s.geometry, b = s.bird;
@@ -217,6 +226,11 @@ class Handler(BaseHTTPRequestHandler):
                     self.send_error(400, f'{key} out of bounds [{lo}, {hi}]'); return
                 params[key] = value
             self._send(200, json.dumps(params).encode(), 'application/json')
+        elif parsed.path == '/reset':
+            # Requests a fresh episode (position/velocity reset) on the next
+            # tick without waiting for a crash; does not touch m/n.
+            reset_requested.set()
+            self._send(200, b'{"ok":true}', 'application/json')
         else:
             self.send_error(404)
 
