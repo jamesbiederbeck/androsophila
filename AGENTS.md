@@ -1,6 +1,12 @@
 # DOOMFLY project constraints
 
-- This repository contains the MaleCNS v1.0 / ViZDoom experiment only.
+- This repository contains the MaleCNS v1.0 / ViZDoom experiment only. The
+  reusable connectome engine (native/GPU LIF kernels, connectome import,
+  physiology/plasticity code) lives in the separate `connectome_sim`
+  submodule repository, shared with a Flappy Bird + haltere inverse-dynamics
+  repository split out at the same time. GPU-backend changes belong in that
+  submodule's repository, not here — it's also the basis of the open PR back
+  to `nftechie/doomfly`. Bump the submodule pointer to pick up changes there.
 - Retain every released connection between the retained neuronal entries. Do not
   crop circuits, prune weak/self edges, or replace the network with a game policy.
 - Keep live RGB input, modeled neural propagation, reinforcement, plasticity and

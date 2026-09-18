@@ -2,6 +2,8 @@
 
 A fly-connectome simulation connected to a live Doom-engine arena. Game frames stimulate modeled sensory neurons; activity propagates through the retained MaleCNS v1.0 wiring, and a fixed neuron-to-button interface turns, moves and fires. An experimental dopamine-gated memory rule changes a small set of existing connections during play.
 
+This repository is a fork of [nftechie/doomfly](https://github.com/nftechie/doomfly) that adds a CuPy GPU backend for the connectome engine, with a PR open upstream. The connectome engine and a second Flappy Bird harness that grew out of this fork have since moved to their own local repositories (not yet published) — `connectome-sim` (mounted here as the `connectome_sim/` submodule) and a Flappy Bird + haltere inverse-dynamics repository — leaving this repo focused on the original ViZDoom experiment again.
+
 **Status: live experimental training, not demonstrated learned survival.** The current v6 candidate failed its visual, conditioning and survival validation gates. Changing weights and longer individual rounds do not establish learning. This repository includes the negative results, controls and modeling assumptions alongside the implementation.
 
 ## The loop
@@ -18,11 +20,10 @@ The wiring comes from a biological reconstruction. The dynamics, retinal interfa
 
 | Path | Contents |
 | --- | --- |
-| `doom/` | ViZDoom interface, arena and broadcaster (imports the engine from `connectome_sim/`) |
-| `connectome_sim/` | Connectome engine: native/GPU LIF simulator, connectome import, photoreceptor sampling, generic physiology/plasticity code shared by more than one game harness. Being split out into its own repository; a git submodule will replace this in-tree copy. |
+| `doom/` | ViZDoom interface, arena and broadcaster (imports the engine from the `connectome_sim/` submodule) |
+| `connectome_sim/` | Git submodule: the connectome engine (native/GPU LIF simulator, connectome import, photoreceptor sampling, generic physiology/plasticity code). Its own repository, shared with the separate Flappy Bird harness. |
 | `doom_learning/`, `doom_learning_v2/` … `doom_learning_v6/` | ViZDoom-specific conditioning, plasticity candidates and controlled learning experiments (their generic pieces now live in `connectome_sim/physiology/`) |
 | `doom-ui/` | Monochrome spectator website, live telemetry, learning and methods pages |
-| `flappy/`, `flappybird/` | Second, lighter game harness (Flappy Bird Gymnasium submodule) and haltere inverse-dynamics research driving the same connectome simulation. Being split into its own repository. |
 | `connectome_sim/connectome.py`, `connectome_sim/datasets.json` | MaleCNS importer and exact input registry |
 | `tests/`, `connectome_sim/tests/` | Neural, numerical, game, reinforcement and checkpoint checks |
 | `docs/`, `outputs/`, `connectome_sim/data-provenance/` | Scientific reviews, compact evidence, source snapshots and dataset hashes |
@@ -33,6 +34,7 @@ The wiring comes from a biological reconstruction. The dynamics, retinal interfa
 Use Python 3.11 and a C++ compiler. The full graph needs several GB of RAM and downloaded data; it does not run inside a browser or an edge function. Use the pinned neural requirements below.
 
 ```sh
+git submodule update --init
 python3.11 -m venv .venv-neural
 source .venv-neural/bin/activate
 python -m pip install --upgrade pip
