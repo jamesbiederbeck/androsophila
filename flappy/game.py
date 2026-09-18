@@ -4,25 +4,31 @@ Mirrors doom/game.py's Game class shape (pixels()/act()/observation()/close()/
 new_episode()) so flappy/play.py can drive the same Brain/NativeBrain/GPUBrain
 without any game-specific code outside this module and vision/retina.py.
 
-A pipe in this game only has two physical degrees of freedom that matter to
-the bird: its gap's vertical position (y) and how far away it is (implicit
-in its scroll position, a stand-in for z/depth). It has no real horizontal
-(x) extent -- the bird's x position is fixed (`_player_x` never changes), so
-there is no "around" to fly through. The stock 52px-wide pipe sprite doesn't
-represent that: it renders as a narrow column with open sky on both sides,
-which looks to a bilinear-sampled retina like a pole with a way around it on
-either flank -- an affordance the bird does not have. `pixels()` projects
-each pipe pair as two full-frame-width bands (a wall with a gap), matching
-the object's real degrees of freedom: solid across all of x, open only in
-the y-band between the pipes. This changes what is rendered for both the
-neural visual input and the human broadcast view (they are always the same
-frame in this repo, matching doom/game.py's convention) -- game physics,
-scoring and collision are untouched; only the picture is reshaped to fit the
-bird's actual constraints.
+A pipe pair in this game is really a hurdle, not a gate: the bird's x
+position is fixed (`_player_x` never changes), so there is nothing to
+dodge sideways, and it clears an obstacle the same way a hurdler does --
+by gaining enough height, not by picking a lane. The stock sprite renders
+the lower pipe as a narrow 52px column with open sky on both flanks, which
+looks to a bilinear-sampled retina like a post with a way around it -- an
+affordance the bird does not have. `pixels()` projects only the *lower*
+pipe as a full-frame-width bar running from the ground up to the gap's
+bottom edge (the hurdle height): solid across all of x, exactly the bar a
+hurdler clears from below, infinitely wide because there is no lateral
+axis to be finite in. The upper pipe is deliberately left unprojected --
+a hurdle has no ceiling above the runner, and drawing one would reintroduce
+the wrong intuition (squeezing through a slot) this change is meant to
+remove. The upper pipe still exists in the underlying env and can still
+end the episode on collision; only its *rendering* is skipped, so flying
+too high remains just as fatal as before, it's simply not drawn as an
+obstacle. This changes what is rendered for both the neural visual input
+and the human broadcast view (they are always the same frame in this repo,
+matching doom/game.py's convention) -- game physics, scoring and collision
+are untouched; only the picture is reshaped to fit the bird's actual
+constraints.
 """
 import numpy as np
 import pygame
-from flappy_bird_gymnasium.envs.constants import PIPE_HEIGHT, PIPE_WIDTH, PLAYER_HEIGHT, PLAYER_WIDTH
+from flappy_bird_gymnasium.envs.constants import PIPE_WIDTH, PLAYER_HEIGHT, PLAYER_WIDTH
 from flappy_bird_gymnasium.envs.flappy_bird_env import FlappyBirdEnv
 
 # The env's only declared tick-rate signal (metadata['render_fps']); not
@@ -63,29 +69,23 @@ class Game:
         if self._finished: raise RuntimeError('Episode finished; reset is required')
         frame = self._frame.copy()
         if self._wall_pipes:
-            band = self._pipe_wall_band()
-            if band is not None:
-                top, bottom = band
-                color = self._pipe_color()
-                if top > 0: frame[:top, :] = color
+            hurdle_top = self._hurdle_height()
+            if hurdle_top is not None:
                 ground_y = int(self.env._ground['y'])
-                if bottom < ground_y: frame[bottom:ground_y, :] = color
+                if hurdle_top < ground_y: frame[hurdle_top:ground_y, :] = self._pipe_color()
         return frame
 
-    def _pipe_wall_band(self):
-        """(top, bottom) pixel rows spanned by solid pipe for the nearest
-        pipe pair the bird hasn't fully passed and that has entered the
-        screen; None if no such pair exists (matches no_pipes and the brief
-        window before the first pipe scrolls into view)."""
+    def _hurdle_height(self):
+        """Pixel row of the top edge of the nearest unpassed, on-screen
+        lower pipe -- the hurdle bar the bird must clear from below. None
+        if no such pipe exists (matches no_pipes and the brief window
+        before the first pipe scrolls into view)."""
         env = self.env
         pairs = [(u, l) for u, l in zip(env._upper_pipes, env._lower_pipes)
                  if u['x'] < env._screen_width and u['x'] + PIPE_WIDTH > env._player_x]
         if not pairs: return None
-        u, l = min(pairs, key=lambda pair: pair[0]['x'])
-        height = env._screen_height
-        top = int(np.clip(u['y'] + PIPE_HEIGHT, 0, height))
-        bottom = int(np.clip(l['y'], 0, height))
-        return top, bottom
+        _, l = min(pairs, key=lambda pair: pair[0]['x'])
+        return int(np.clip(l['y'], 0, env._screen_height))
 
     def _pipe_color(self):
         # Sampled once from the loaded sprite (not hardcoded) so this tracks

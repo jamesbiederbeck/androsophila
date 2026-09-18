@@ -47,7 +47,7 @@ def test_game_pixels_and_act_advance_tick_deterministically():
         g.close()
 
 
-def test_pipes_are_projected_as_full_width_walls_with_an_open_gap():
+def test_lower_pipe_is_projected_as_a_full_width_hurdle():
     from flappy.game import Game
     g = Game(seed=41027)
     try:
@@ -55,16 +55,16 @@ def test_pipes_are_projected_as_full_width_walls_with_an_open_gap():
             g.act(False)
             if g.observation()['finished']:
                 g.new_episode()
-        band = g._pipe_wall_band()
-        assert band is not None
-        top, bottom = band
+        hurdle_top = g._hurdle_height()
+        assert hurdle_top is not None
         frame = g.pixels()
         color = g._pipe_color()
-        # solid, full-width, single-color band above and below the gap
-        np.testing.assert_array_equal(frame[top - 1], np.tile(color, (frame.shape[1], 1)))
-        np.testing.assert_array_equal(frame[bottom], np.tile(color, (frame.shape[1], 1)))
-        # the gap itself is untouched (not pipe-colored)
-        assert not np.array_equal(frame[(top + bottom) // 2, 0], color)
+        ground_y = int(g.env._ground['y'])
+        # solid, full-width, single-color bar from the hurdle height to the ground
+        np.testing.assert_array_equal(frame[hurdle_top], np.tile(color, (frame.shape[1], 1)))
+        np.testing.assert_array_equal(frame[ground_y - 1], np.tile(color, (frame.shape[1], 1)))
+        # above the hurdle is untouched (no ceiling band -- a hurdle has none)
+        assert not np.array_equal(frame[max(hurdle_top - 5, 0), 0], color)
     finally:
         g.close()
 
@@ -86,7 +86,7 @@ def test_no_pipes_leaves_wall_projection_a_no_op():
     from flappy.game import Game
     g = Game(seed=41027, no_pipes=True)
     try:
-        assert g._pipe_wall_band() is None
+        assert g._hurdle_height() is None
         np.testing.assert_array_equal(g.pixels(), g._frame)
     finally:
         g.close()
