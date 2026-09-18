@@ -3,14 +3,13 @@
 Only GET /state and /health are exposed. No filesystem, shell, credentials,
 remote controls, or model-mutating endpoint. Stale frames never become replays.
 """
-import argparse,base64,hashlib,io,json,threading,time,uuid,logging
+import argparse,base64,hashlib,json,threading,time,uuid,logging
 import re,signal
 from logging.handlers import RotatingFileHandler
 from collections import deque
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 import numpy as np
-from PIL import Image
 from doom.native import NativeBrain,BUILD
 from doom.engine import NeuralControls
 from doom.game import Game,retinal_samples
@@ -25,9 +24,7 @@ latest={'status':'starting','generated_at_ms':0}; stop=threading.Event()
 broadcast=Broadcast()
 observer=None
 
-def encoded_frame(rgb):
-    f=io.BytesIO();Image.fromarray(rgb).save(f,format='JPEG',quality=75)
-    return 'data:image/jpeg;base64,'+base64.b64encode(f.getvalue()).decode()
+from doom.mjpeg import encoded_frame  # noqa: F401 -- re-exported for existing callers
 
 def run_loop(args):
     global latest,observer

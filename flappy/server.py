@@ -22,7 +22,7 @@ import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from doom.native import NativeBrain
-from doom.server import encoded_frame
+from doom.mjpeg import encoded_frame
 from flappy.circuit import haltere_afferents, haltere_current_for_velocity, wing_motor_readouts
 from flappy.controls import FlapControls
 from flappy.game import Game, FPS
