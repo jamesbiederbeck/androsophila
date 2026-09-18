@@ -1,0 +1,11 @@
+{
+  "model": "all-modulators-separated-v2",
+  "source_sha256": "f1cca01b570f7445295c1d631cdaa108e16d268d39e5bfaeaf4dee7344114f37",
+  "binary_sha256": "b49aa65576eb3aa9ee220dad8c3d4c6c493bc16344a94e5ecf6e8bf78c28b242",
+  "flags": [
+    "-O3",
+    "-std=c++17",
+    "-shared",
+    "-fPIC"
+  ]
+}

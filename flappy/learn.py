@@ -16,6 +16,7 @@ import argparse
 import json
 import time
 from pathlib import Path
+import numpy as np
 from doom_learning_v6.calibration import calibrated_brain
 from flappy.circuit import haltere_afferents, haltere_current_for_velocity, wing_motor_readouts
 from flappy.controls import FlapControls
@@ -25,15 +26,17 @@ from flappy.training import FlapTraining
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def run(ticks, seed, eta, learning, haltere_m, haltere_n, no_pipes):
+def run(ticks, seed, eta, learning, haltere_m, haltere_n, no_pipes, perspective=True):
     brain = calibrated_brain(eta=eta)
     training = FlapTraining(brain, enabled=learning)
     haltere = haltere_afferents(brain)
-    controls = FlapControls(wing_motor_readouts(brain))
-    game = Game(seed=seed, no_pipes=no_pipes)
+    readouts = wing_motor_readouts(brain)
+    controls = FlapControls(readouts)
+    dlm = np.array([r['index'] for r in readouts], dtype=np.int32)
+    game = Game(seed=seed, no_pipes=no_pipes, perspective=perspective)
     duration_ms = 1000 / FPS
     memory_before = training.telemetry()
-    episode_lengths, flaps = [], 0
+    episode_lengths, flaps, dlm_spikes = [], 0, 0
     start = time.perf_counter()
     for _ in range(ticks):
         before = game.observation()
@@ -48,6 +51,7 @@ def run(ticks, seed, eta, learning, haltere_m, haltere_n, no_pipes):
         counts, _ = training.step(frame, duration_ms, haltere_stimulation=haltere_stim)
         action = controls.decode(counts, duration_ms / 1000)
         flaps += int(action['flap'])
+        dlm_spikes += int(counts[dlm].sum())
         game.act(action['flap'])
         training.observe(game.observation()['finished'])
     episode_lengths.append(game.observation()['tick'])
@@ -57,6 +61,7 @@ def run(ticks, seed, eta, learning, haltere_m, haltere_n, no_pipes):
     return {
         'ticks': ticks, 'seed': seed, 'eta': eta, 'learning': learning,
         'haltere_m': haltere_m, 'haltere_n': haltere_n, 'no_pipes': no_pipes,
+        'perspective': perspective, 'dlm_spikes': dlm_spikes,
         'episodes_completed': len(episode_lengths), 'episode_lengths': episode_lengths,
         'flaps': flaps, 'wall_seconds': round(wall, 3),
         'ticks_per_second': round(ticks / wall, 3) if wall > 0 else None,
@@ -76,9 +81,11 @@ def main():
     p.add_argument('--haltere-m', type=float, default=1.75)
     p.add_argument('--haltere-n', type=float, default=2.)
     p.add_argument('--no-pipes', action='store_true')
+    p.add_argument('--flat', dest='perspective', action='store_false', default=True,
+                    help="Feed the game's own side-on camera instead of the bird's first-person view")
     args = p.parse_args()
     report = run(args.ticks, args.seed, args.eta, args.learning,
-                 args.haltere_m, args.haltere_n, args.no_pipes)
+                 args.haltere_m, args.haltere_n, args.no_pipes, args.perspective)
     print(json.dumps(report, indent=2))
 
 

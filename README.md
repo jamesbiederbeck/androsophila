@@ -12,7 +12,7 @@ A fly-connectome simulation connected to a live Doom-engine arena. Game frames s
 4. Nonfatal damage schedules a **200 ms artificial aversive input into two PPL101 dopamine cells**. KC and dopamine activity drive an adapted plasticity rule on **4,184 existing KC→MBON11 connections**. The rest of the wiring and controller remain fixed.
 5. Death starts a new arena round while neural state and memory persist. All viewers watch the same experiment.
 
-The wiring comes from a biological reconstruction. The dynamics, retinal interface, artificial reinforcement and controller are models and engineering choices. This is not a literal reconstructed living fly brain. See the [current training protocol](docs/doom-live-training.md), [model review](docs/doom-neuroscience-review.md), and [iteration results](doom-ui/public/learning-iterations.json).
+The wiring comes from a biological reconstruction. The dynamics, retinal interface, artificial reinforcement and controller are models and engineering choices. This is not a literal reconstructed living fly brain. See the [current training protocol](docs/doom-live-training.md), [model review](docs/doom-neuroscience-review.md), [iteration results](doom-ui/public/learning-iterations.json), and a [glossary of terms](docs/glossary.md) (UV, lamina, KC/MBON/DAN, DLM, haltere, etc.).
 
 ## Repository map
 
