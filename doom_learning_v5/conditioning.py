@@ -5,7 +5,7 @@ import numpy as np
 from .calibration import calibrated_brain
 from .brain import PARAMETERS
 from doom_learning_v2.vision import frame_for
-from doom_learning.common import OUT,save_json,capture_provenance,digest
+from connectome_sim.physiology.common import OUT,save_json,capture_provenance,digest
 
 
 def run(out,eta=.001,us_current=4.):

@@ -7,12 +7,12 @@ every neural step remains 0.1 ms, with fixed DNp20/DNpe017 button decoding.
 import argparse,json,time
 from pathlib import Path
 import numpy as np
-from .calibration import calibrated_brain
-from doom_learning.common import GRAPH,save_json,capture_provenance,digest,require_single_blas_thread
+from connectome_sim.physiology.calibration import calibrated_brain
+from connectome_sim.physiology.common import GRAPH,save_json,capture_provenance,digest,require_single_blas_thread
 from doom_learning.controls import shifted_exposure
 from doom_learning.survival_arena import SurvivalArena
 from doom_learning_v2.vision import frame_for
-from doom.engine import NeuralControls
+from connectome_sim.engine import NeuralControls
 
 
 def horizon_steps(seconds):return round(round(seconds*35)*10000/35)

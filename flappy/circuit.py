@@ -40,7 +40,7 @@ that adjusts m and n against the running simulation.
 """
 import math
 import numpy as np
-from doom_learning.common import annotations
+from connectome_sim.physiology.common import annotations
 from flappy_bird_gymnasium.envs.constants import PLAYER_MAX_VEL_Y
 
 DLM_TYPES = ['DLMn a, b', 'DLMn c-f']

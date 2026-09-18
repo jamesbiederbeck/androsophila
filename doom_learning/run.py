@@ -6,13 +6,13 @@ clock sleeping; it does not mean skipping sensory frames or simulation time.
 """
 import argparse,json,time
 from pathlib import Path
-from .common import require_single_blas_thread, ROOT, GRAPH, OUT, save_json, digest, capture_provenance
+from connectome_sim.physiology.common import require_single_blas_thread, ROOT, GRAPH, OUT, save_json, digest, capture_provenance
 
 
 def episode(brain, seed, seconds, *, learning=False, vision='intact', stimulation_schedule=None,
             record_frames=False, out=None):
     import numpy as np
-    from doom.engine import NeuralControls
+    from connectome_sim.engine import NeuralControls
     from doom.game import Game,retinal_samples
     manifest=json.loads((GRAPH.parent/'manifest.json').read_text())
     controls=NeuralControls(manifest['readouts'],mode='bci')

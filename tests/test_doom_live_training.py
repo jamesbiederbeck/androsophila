@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 from doom.training import DamageTraining
 from doom.training_checkpoint import TrainingCheckpoints
-from doom.engine import NeuralControls
+from connectome_sim.engine import NeuralControls
 
 
 class PulseBrain:
@@ -49,7 +49,7 @@ def test_frozen_arm_receives_same_stimulus_without_enabling_plasticity():
 
 
 def test_full_learning_and_decoder_checkpoint_continues_exactly(tmp_path):
-    from test_doom_learning_v6 import brain
+    from connectome_sim.tests.test_doom_learning_v6 import brain
     b=brain(tmp_path);controls=NeuralControls([])
     b.step([],100,learning=True,stimulation=([0,2],20),lamina_bias=0)
     game=SimpleNamespace(episode=3,tick=20,observation=lambda:{'episode':3,'tick':20,'health':80})

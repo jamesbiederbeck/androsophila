@@ -10,8 +10,8 @@ from collections import deque
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 import numpy as np
-from doom.native import NativeBrain,BUILD
-from doom.engine import NeuralControls
+from connectome_sim.native import NativeBrain,BUILD
+from connectome_sim.engine import NeuralControls
 from doom.game import Game,retinal_samples
 from doom.reward import SugarReinforcement
 from doom.provenance import provenance
@@ -24,7 +24,7 @@ latest={'status':'starting','generated_at_ms':0}; stop=threading.Event()
 broadcast=Broadcast()
 observer=None
 
-from doom.mjpeg import encoded_frame  # noqa: F401 -- re-exported for existing callers
+from connectome_sim.mjpeg import encoded_frame  # noqa: F401 -- re-exported for existing callers
 
 def run_loop(args):
     global latest,observer
@@ -32,7 +32,7 @@ def run_loop(args):
         manifest=json.loads((ROOT/'outputs/doom/malecns_v1/manifest.json').read_text())
         training=None
         if args.model=='experimental-v6':
-            from doom_learning_v6.calibration import calibrated_brain
+            from connectome_sim.physiology.calibration import calibrated_brain
             from doom.training import DamageTraining,candidate_provenance
             brain=calibrated_brain();training=DamageTraining(brain,args.learning)
             for r in brain.circuit['report']['DAN']+brain.circuit['report']['MBON']:
@@ -41,7 +41,7 @@ def run_loop(args):
             manifest['visual_dynamics']='R1–R6 luminance and 811 R8 RGB proxies, filtered in <=10 ms bins; inferred projection, simplified spiking physiology; unvalidated.'
             manifest['additional_R8_inputs']=len(brain.r8);build=BUILD
         elif args.backend=='gpu':
-            from doom.gpu import GPUBrain,GPU_BUILD
+            from connectome_sim.gpu import GPUBrain,GPU_BUILD
             brain=GPUBrain(ROOT/'outputs/doom/malecns_v1/graph.npz');build=GPU_BUILD
         else:brain=NativeBrain(ROOT/'outputs/doom/malecns_v1/graph.npz');build=BUILD
         phase=('training' if args.learning else 'frozen-control') if training else 'baseline'

@@ -1,7 +1,7 @@
 """Reproducible R8 pathway assay; no game score or learned decoder involved."""
 import argparse,time
 import numpy as np
-from doom_learning.common import annotations,OUT,save_json,digest
+from connectome_sim.physiology.common import annotations,OUT,save_json,digest
 
 
 def frame_for(label,width=320,height=240):

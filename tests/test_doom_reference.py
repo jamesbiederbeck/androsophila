@@ -8,7 +8,7 @@ def _to_numpy(x):
 
 def _gpu_available():
     try:
-        from doom.gpu import _configure_cuda_env
+        from connectome_sim.gpu import _configure_cuda_env
         _configure_cuda_env()
         import cupy
         return cupy.cuda.runtime.getDeviceCount() > 0
@@ -23,8 +23,8 @@ def test_kernel_against_brian2_with_refractory_inputs(tmp_path, backend, cadence
     if backend == 'gpu' and not _gpu_available():
         pytest.skip('No cupy/CUDA GPU available for the gpu backend')
     import brian2 as b2
-    from doom.engine import Brain
-    from doom.native import NativeBrain
+    from connectome_sim.engine import Brain
+    from connectome_sim.native import NativeBrain
     b2.start_scope(); b2.prefs.codegen.target = 'numpy'; b2.defaultclock.dt = .1*b2.ms
     n = 4
     pre = np.array([0,0,0,1,1,2,3]); post = np.array([0,1,2,2,3,1,0], dtype=np.int32)
@@ -37,7 +37,7 @@ def test_kernel_against_brian2_with_refractory_inputs(tmp_path, backend, cadence
     if backend == 'dense': BrainClass = Brain
     elif backend == 'native': BrainClass = NativeBrain
     else:
-        from doom.gpu import GPUBrain
+        from connectome_sim.gpu import GPUBrain
         BrainClass = GPUBrain
     brain = BrainClass(path)
     neurons = b2.NeuronGroup(n, '''

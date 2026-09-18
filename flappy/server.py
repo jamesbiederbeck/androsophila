@@ -21,12 +21,12 @@ import time
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from doom.native import NativeBrain
-from doom.mjpeg import encoded_frame
+from connectome_sim.native import NativeBrain
+from connectome_sim.mjpeg import encoded_frame
 from flappy.circuit import haltere_afferents, haltere_current_for_velocity, wing_motor_readouts
 from flappy.controls import FlapControls
 from flappy.game import Game, FPS
-from vision.retina import BilinearLuminance
+from connectome_sim.vision.retina import BilinearLuminance
 
 ROOT = Path(__file__).resolve().parents[1]
 latest = {'status': 'starting', 'generated_at_ms': 0}
@@ -38,10 +38,10 @@ def run_loop(args):
     try:
         path = ROOT / 'outputs/doom' / args.dataset / 'graph.npz'
         if args.backend == 'gpu':
-            from doom.gpu import GPUBrain, GPU_BUILD
+            from connectome_sim.gpu import GPUBrain, GPU_BUILD
             brain = GPUBrain(path); build = GPU_BUILD
         else:
-            from doom.native import BUILD
+            from connectome_sim.native import BUILD
             brain = NativeBrain(path); build = BUILD
         haltere = haltere_afferents(brain)
         controls = FlapControls(wing_motor_readouts(brain))

@@ -28,7 +28,7 @@ class Checkpoints:
         self.directory.mkdir(parents=True,exist_ok=True)
 
     def save(self,brain,controls,game,record):
-        from doom.native import NativeBrain
+        from connectome_sim.native import NativeBrain
         if type(brain) is not NativeBrain or game.scenario!='combat_survival':
             raise ValueError('Only the fixed baseline and unlimited combat arena support this recovery format')
         generation=uuid.uuid4().hex
@@ -50,7 +50,7 @@ class Checkpoints:
             raise
 
     def restore(self,brain,controls,game):
-        from doom.native import NativeBrain
+        from connectome_sim.native import NativeBrain
         if type(brain) is not NativeBrain or game.scenario!='combat_survival':raise ValueError('Unsupported recovery model')
         pointer=self.directory/'latest.json'
         if not pointer.exists():return None

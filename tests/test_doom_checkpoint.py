@@ -3,8 +3,8 @@ import hashlib
 import json
 import numpy as np
 import pytest
-from doom.native import NativeBrain
-from doom.engine import NeuralControls
+from connectome_sim.native import NativeBrain
+from connectome_sim.engine import NeuralControls
 from doom.game import Game,retinal_samples
 from doom.checkpoint import Checkpoints
 from test_doom import toy_graph

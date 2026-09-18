@@ -17,7 +17,7 @@ import json
 import time
 from pathlib import Path
 import numpy as np
-from doom_learning_v6.calibration import calibrated_brain
+from connectome_sim.physiology.calibration import calibrated_brain
 from flappy.circuit import haltere_afferents, haltere_current_for_velocity, wing_motor_readouts
 from flappy.controls import FlapControls
 from flappy.game import Game, FPS

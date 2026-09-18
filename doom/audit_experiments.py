@@ -2,9 +2,9 @@
 import gc, hashlib, json, time
 from pathlib import Path
 import numpy as np
-from doom.native import NativeBrain, BUILD
+from connectome_sim.native import NativeBrain, BUILD
 from doom.game import Game, retinal_samples
-from doom.engine import NeuralControls
+from connectome_sim.engine import NeuralControls
 ROOT=Path(__file__).resolve().parents[1]
 PATH=ROOT/'outputs/doom/malecns_v1/graph.npz'
 M=json.loads((PATH.parent/'manifest.json').read_text())

@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import numpy as np
 import pytest
-from doom.engine import NeuralControls
+from connectome_sim.engine import NeuralControls
 from doom.game import retinal_samples
 from doom.reward import SugarReinforcement
 
@@ -45,8 +45,8 @@ def toy_graph(tmp_path):
     return p
 
 def test_lazy_kernel_matches_dense_reference_with_changing_inputs(tmp_path):
-    from doom.engine import Brain
-    from doom.native import NativeBrain
+    from connectome_sim.engine import Brain
+    from connectome_sim.native import NativeBrain
     path=toy_graph(tmp_path);a=Brain(path);b=NativeBrain(path)
     for light,sugar in [([0,0],False),([1,.2],False),([0,0],True),([.4,1],False),([0,0],False)]:
         ca,_=a.step(np.array(light),50,sugar=sugar);cb,_=b.step(np.array(light),50,sugar=sugar)
@@ -55,7 +55,7 @@ def test_lazy_kernel_matches_dense_reference_with_changing_inputs(tmp_path):
         np.testing.assert_allclose(a.g,b.g,atol=.002,rtol=0)
 
 def test_all_edges_disconnected_blocks_downstream_activity(tmp_path):
-    from doom.native import NativeBrain
+    from connectome_sim.native import NativeBrain
     b=NativeBrain(toy_graph(tmp_path));b.weight.fill(0)
     c,_=b.step(np.array([1.,1.]),300)
     assert c[:4].sum()>0 and c[4:].sum()==0
@@ -86,7 +86,7 @@ def test_bci_is_a_fixed_neural_readout_not_a_game_policy():
     a=d.decode(np.zeros(4),.1);assert not a['attack']
 
 def test_native_rejects_invalid_arrays_before_ffi(tmp_path):
-    from doom.native import NativeBrain
+    from connectome_sim.native import NativeBrain
     good=toy_graph(tmp_path)
     with np.load(good) as f: data={k:f[k] for k in f.files}
     data['post'][0]=1000

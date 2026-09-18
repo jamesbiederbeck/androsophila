@@ -25,7 +25,7 @@ import json
 from pathlib import Path
 import numpy as np
 import pyarrow.feather as feather
-from doom.native import NativeBrain
+from connectome_sim.native import NativeBrain
 from flappy.circuit import haltere_afferents
 from flappy.inverse_data import reset, wing_muscle_readouts
 
@@ -58,7 +58,7 @@ def main():
 
     path = ROOT / 'outputs/doom' / args.dataset / 'graph.npz'
     if args.backend == 'gpu':
-        from doom.gpu import GPUBrain
+        from connectome_sim.gpu import GPUBrain
         brain = GPUBrain(path)
     else:
         brain = NativeBrain(path)

@@ -5,7 +5,7 @@ current stimulation of identified KCs bypasses vision; this cannot pass the
 visual-conditioning gate or establish replication of the original odor assay.
 """
 import argparse,json,time
-from doom_learning.common import require_single_blas_thread, OUT, save_json, annotations
+from connectome_sim.physiology.common import require_single_blas_thread, OUT, save_json, annotations
 
 
 def run(out=OUT/'physiology-v3/conditioning.json',current=15.2):

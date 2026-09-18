@@ -4,7 +4,7 @@ This evaluates signal propagation and distinguishability, not calibrated fly
 vision or learned gameplay. Every condition starts with identical neural state.
 """
 import argparse, time
-from .common import require_single_blas_thread, annotations, GRAPH, OUT, save_json, digest
+from connectome_sim.physiology.common import require_single_blas_thread, annotations, GRAPH, OUT, save_json, digest
 
 
 def stimulus(name, tick, width=640, height=480):
@@ -24,9 +24,9 @@ def stimulus(name, tick, width=640, height=480):
 
 def run(seconds=1.0, out=OUT / 'vision.json'):
     import numpy as np
-    from doom.native import NativeBrain, BUILD
+    from connectome_sim.native import NativeBrain, BUILD
     from doom.game import retinal_samples
-    from doom.engine import NeuralControls
+    from connectome_sim.engine import NeuralControls
     import json
     b = NativeBrain(GRAPH)
     a = annotations(b.ids)

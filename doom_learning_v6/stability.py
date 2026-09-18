@@ -2,9 +2,9 @@
 import argparse,time
 from pathlib import Path
 import numpy as np
-from .calibration import calibrated_brain
+from connectome_sim.physiology.calibration import calibrated_brain
 from doom_learning_v2.vision import frame_for
-from doom_learning.common import save_json,capture_provenance
+from connectome_sim.physiology.common import save_json,capture_provenance
 
 
 def run(out):

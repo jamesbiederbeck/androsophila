@@ -2,7 +2,7 @@
 import hashlib,json,zipfile
 from datetime import datetime,timezone
 from pathlib import Path
-from .common import ROOT,OUT,save_json
+from connectome_sim.physiology.common import ROOT,OUT,save_json
 
 
 def read(path):
@@ -58,12 +58,18 @@ def main():
     sources=[]
     for folder in ['doom','doom_learning',*[f'doom_learning_v{i}' for i in range(2,7)],'tests']:
         sources += [p for p in (ROOT/folder).iterdir() if p.suffix in ['.py','.cpp','.md'] and (folder!='tests' or p.name.startswith('test_doom') or p.name=='test_connectome.py')]
-    sources += [ROOT/'docs/doom-learning-iteration-log.md',ROOT/'research/huang-2024/targets.json']
+    # connectome_sim/ holds the engine (native/GPU kernels, connectome import) and
+    # the generic physiology/plasticity code doom.server actually loads at
+    # runtime -- it moved out of doom/ and doom_learning*/ but the deployed
+    # model's source still has to appear in this transparency bundle.
+    for folder in ['connectome_sim','connectome_sim/physiology','connectome_sim/vision','connectome_sim/tests']:
+        sources += [p for p in (ROOT/folder).iterdir() if p.suffix in ['.py','.cpp','.md'] and (folder!='connectome_sim/tests' or p.name.startswith('test_'))]
+    sources += [ROOT/'docs/doom-learning-iteration-log.md',ROOT/'connectome_sim/research/huang-2024/targets.json']
     for folder in [*[f'physiology-v{i}' for i in range(2,7)],'survival-arena']:
         sources += [p for p in (OUT/folder).rglob('*') if p.is_file() and p.suffix in ['.json','.py','.cpp','.wad']]
     # External workbooks are retrieved from the cited publisher, never bundled.
     sources += [ROOT/'LICENSE', ROOT/'THIRD_PARTY.md', ROOT/'THIRD_PARTY_NOTICES.md',
-                ROOT/'research/huang-2024/README.md', ROOT/'doom/datasets.json']
+                ROOT/'connectome_sim/research/huang-2024/README.md', ROOT/'connectome_sim/datasets.json']
     sources += [p for p in (ROOT/'licenses').rglob('*') if p.is_file()]
     archive=ROOT/'doom-ui/public/learning-iterations-source.zip';manifest={}
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:

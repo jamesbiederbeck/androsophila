@@ -20,7 +20,7 @@ import argparse
 import json
 from pathlib import Path
 import numpy as np
-from doom.native import NativeBrain
+from connectome_sim.native import NativeBrain
 from flappy.circuit import haltere_afferents
 from flappy.inverse_data import reset, wing_muscle_readouts
 
@@ -46,7 +46,7 @@ def roundtrip(model_path, backend, duration_ms, min_k, max_k, min_amp, max_amp, 
     model = load_model(model_path)
     path = ROOT / 'outputs/doom/malecns_v1/graph.npz'
     if backend == 'gpu':
-        from doom.gpu import GPUBrain
+        from connectome_sim.gpu import GPUBrain
         brain = GPUBrain(path)
     else:
         brain = NativeBrain(path)

@@ -2,7 +2,7 @@
 biological validation. Mirrors tests/test_doom.py's coverage shape."""
 import numpy as np
 from flappy.controls import FlapControls
-from vision.retina import BilinearLuminance
+from connectome_sim.vision.retina import BilinearLuminance
 
 
 def test_bilinear_luminance_wraps_retinal_samples_unchanged():

@@ -2,7 +2,7 @@
 import argparse,json,statistics
 from datetime import datetime,timezone
 from pathlib import Path
-from .common import OUT,save_json
+from connectome_sim.physiology.common import OUT,save_json
 
 
 def load(path,default=None):

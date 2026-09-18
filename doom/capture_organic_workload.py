@@ -22,8 +22,8 @@ import argparse
 import json
 from pathlib import Path
 import numpy as np
-from doom.native import NativeBrain
-from doom.engine import NeuralControls
+from connectome_sim.native import NativeBrain
+from connectome_sim.engine import NeuralControls
 from doom.game import Game, retinal_samples
 
 ROOT = Path(__file__).resolve().parents[1]

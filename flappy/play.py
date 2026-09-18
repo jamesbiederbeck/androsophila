@@ -17,11 +17,11 @@ import argparse
 import json
 import time
 from pathlib import Path
-from doom.native import NativeBrain
+from connectome_sim.native import NativeBrain
 from flappy.circuit import haltere_afferents, haltere_current_for_velocity, wing_motor_readouts
 from flappy.controls import FlapControls
 from flappy.game import Game, FPS
-from vision.retina import BilinearLuminance
+from connectome_sim.vision.retina import BilinearLuminance
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def run(ticks, dataset, seed, backend, haltere_gain=1.):
     path = ROOT / 'outputs/doom' / dataset / 'graph.npz'
     if backend == 'gpu':
-        from doom.gpu import GPUBrain
+        from connectome_sim.gpu import GPUBrain
         brain = GPUBrain(path)
     else:
         brain = NativeBrain(path)

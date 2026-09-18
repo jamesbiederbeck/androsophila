@@ -18,14 +18,14 @@ The wiring comes from a biological reconstruction. The dynamics, retinal interfa
 
 | Path | Contents |
 | --- | --- |
-| `doom/` | Whole-graph simulator, native kernel, ViZDoom interface, arena and broadcaster |
-| `doom_learning/`, `doom_learning_v2/` … `doom_learning_v6/` | Conditioning, plasticity candidates and controlled learning experiments |
+| `doom/` | ViZDoom interface, arena and broadcaster (imports the engine from `connectome_sim/`) |
+| `connectome_sim/` | Connectome engine: native/GPU LIF simulator, connectome import, photoreceptor sampling, generic physiology/plasticity code shared by more than one game harness. Being split out into its own repository; a git submodule will replace this in-tree copy. |
+| `doom_learning/`, `doom_learning_v2/` … `doom_learning_v6/` | ViZDoom-specific conditioning, plasticity candidates and controlled learning experiments (their generic pieces now live in `connectome_sim/physiology/`) |
 | `doom-ui/` | Monochrome spectator website, live telemetry, learning and methods pages |
-| `vision/` | Game-agnostic photoreceptor-sampling interface shared by `doom/` and `flappy/` |
-| `flappy/`, `flappybird/` | Second, lighter game harness (Flappy Bird Gymnasium submodule) driving the same connectome simulation |
-| `doom/connectome.py`, `doom/datasets.json` | MaleCNS importer and exact input registry |
-| `tests/` | Neural, numerical, game, reinforcement and checkpoint checks |
-| `docs/`, `outputs/`, `data-provenance/` | Scientific reviews, compact evidence, source snapshots and dataset hashes |
+| `flappy/`, `flappybird/` | Second, lighter game harness (Flappy Bird Gymnasium submodule) and haltere inverse-dynamics research driving the same connectome simulation. Being split into its own repository. |
+| `connectome_sim/connectome.py`, `connectome_sim/datasets.json` | MaleCNS importer and exact input registry |
+| `tests/`, `connectome_sim/tests/` | Neural, numerical, game, reinforcement and checkpoint checks |
+| `docs/`, `outputs/`, `connectome_sim/data-provenance/` | Scientific reviews, compact evidence, source snapshots and dataset hashes |
 | `deploy/doomfly/` | Prepared container and deployment instructions |
 
 ## Run the neural experiment
@@ -40,15 +40,15 @@ python -m pip install -r requirements-neural.txt -r doom/requirements.txt \
   --build-constraint neural-build-constraints.txt
 ```
 
-Download the three MaleCNS inputs listed in [`doom/datasets.json`](doom/datasets.json) to `connectome_data/malecns_v1/`, using the exact registry filenames. Verify them against [`data-provenance/malecns_v1/source.lock.json`](data-provenance/malecns_v1/source.lock.json). The following downloads missing files and checks every digest before import:
+Download the three MaleCNS inputs listed in [`connectome_sim/datasets.json`](connectome_sim/datasets.json) to `connectome_data/malecns_v1/`, using the exact registry filenames. Verify them against [`connectome_sim/data-provenance/malecns_v1/source.lock.json`](connectome_sim/data-provenance/malecns_v1/source.lock.json). The following downloads missing files and checks every digest before import:
 
 ```sh
 python - <<'PY'
 from pathlib import Path
 import hashlib, json, urllib.request
 name = 'malecns_v1'
-registry = json.loads(Path('doom/datasets.json').read_text())['datasets'][name]
-locked = json.loads(Path(f'data-provenance/{name}/source.lock.json').read_text())
+registry = json.loads(Path('connectome_sim/datasets.json').read_text())['datasets'][name]
+locked = json.loads(Path(f'connectome_sim/data-provenance/{name}/source.lock.json').read_text())
 root = Path('connectome_data') / name
 root.mkdir(parents=True, exist_ok=True)
 for filename, url in registry['files'].items():
@@ -63,10 +63,10 @@ for filename, url in registry['files'].items():
         raise RuntimeError(f'Source checksum mismatch: {filename}')
 (root / 'source.lock.json').write_text(json.dumps(locked, indent=2) + '\n')
 PY
-python -m doom.connectome malecns_v1
+python -m connectome_sim.connectome malecns_v1
 python -m doom.prepare
-python -m doom.audit_data
-python -m doom.build_kernel
+python -m connectome_sim.audit_data
+python -m connectome_sim.build_kernel
 python -m doom.server --model experimental-v6 --learning --port 8766 \
   --audit-dir outputs/doom/local-training \
   --checkpoint-dir outputs/doom/local-training/checkpoints \

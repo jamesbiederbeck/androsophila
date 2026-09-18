@@ -3,9 +3,9 @@ from pathlib import Path
 import gc,hashlib,json,time
 import numpy as np
 from PIL import Image
-from doom.native import NativeBrain
+from connectome_sim.native import NativeBrain
 from doom.game import Game,retinal_samples
-from doom.engine import NeuralControls
+from connectome_sim.engine import NeuralControls
 ROOT=Path(__file__).resolve().parents[1]
 def main():
     path=ROOT/'outputs/doom/malecns_v1/graph.npz'

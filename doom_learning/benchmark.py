@@ -6,7 +6,7 @@ This changes execution scheduling only. Both batches use the same game seeds,
 import argparse,json,subprocess,sys,time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from .common import OUT,require_single_blas_thread,save_json
+from connectome_sim.physiology.common import OUT,require_single_blas_thread,save_json
 
 
 def worker(out,seed,seconds):

@@ -89,4 +89,4 @@ class Game:
         return result
     def close(self):self.game.close()
 
-from doom.photoreceptor import retinal_samples  # noqa: F401 -- re-exported for existing callers
+from connectome_sim.photoreceptor import retinal_samples  # noqa: F401 -- re-exported for existing callers

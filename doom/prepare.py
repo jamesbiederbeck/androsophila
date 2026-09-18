@@ -6,7 +6,7 @@ import pyarrow as pa
 import pyarrow.feather as feather
 import pyarrow.ipc as ipc
 from scipy.sparse import csr_matrix
-from doom.transmitters import transmitter_signs
+from connectome_sim.transmitters import transmitter_signs
 
 ROOT=Path(__file__).resolve().parents[1]
 

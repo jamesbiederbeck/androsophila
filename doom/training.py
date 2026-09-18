@@ -91,7 +91,7 @@ def candidate_provenance(brain, root):
     paths = []
     for directory in ['doom_learning', 'doom_learning_v6']:
         paths += list((root/directory).glob('*.py')) + list((root/directory).glob('*.cpp'))
-    from doom_learning_v6.brain import PARAMETERS
+    from connectome_sim.physiology.brain import PARAMETERS
     return {'model': 'adaptive-centered-v6-live-v1', 'validated': False,
         'kernel': brain.build, 'parameters': {**PARAMETERS, 'eta': brain.eta},
         'configuration': brain.configuration_signature(), 'calibration': brain.calibration,

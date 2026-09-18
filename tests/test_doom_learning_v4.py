@@ -59,7 +59,7 @@ def test_memory_only_persists_and_reset_erases_changes(tmp_path):
 
 
 def test_unchanged_integration_matches_original_kernel(tmp_path):
-    from doom.native import NativeBrain
+    from connectome_sim.native import NativeBrain
     b=fixture_brain(tmp_path,modulation=False)
     a=NativeBrain(tmp_path/'memory.npz')
     for bias in [12.,0.,18.,3.]:

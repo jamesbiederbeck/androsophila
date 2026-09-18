@@ -1,7 +1,7 @@
 """Flappy Bird's binary action decoded from spikes.
 
 There is no biological "flap" readout -- flies do not play Flappy Bird. This
-reuses the same boolean-trigger pattern doom/engine.py's NeuralControls
+reuses the same boolean-trigger pattern connectome_sim/engine.py's NeuralControls
 already uses for its own discrete action (attack, off the MN9 readout): flap
 fires exactly when the chosen readout type spikes at all this tick. Same
 "joystick gains, not biology" honesty as the rest of this project's motor

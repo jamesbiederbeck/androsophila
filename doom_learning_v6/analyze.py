@@ -1,7 +1,7 @@
 """Mechanical integrity checks and honest, descriptive pilot comparisons."""
 import argparse,json
 from pathlib import Path
-from doom_learning.common import save_json
+from connectome_sim.physiology.common import save_json
 
 
 def analyze(folder):

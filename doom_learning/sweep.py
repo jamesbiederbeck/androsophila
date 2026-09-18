@@ -6,7 +6,7 @@ Each process owns its full neural state, weights, game, and output directory.
 import argparse,json,os,subprocess,sys
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from pathlib import Path
-from .common import require_single_blas_thread,OUT,save_json
+from connectome_sim.physiology.common import require_single_blas_thread,OUT,save_json
 
 
 def main():

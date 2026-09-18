@@ -9,7 +9,7 @@ import argparse,time
 import numpy as np
 from .visual import VisualMemoryBrain
 from doom_learning_v2.vision import frame_for
-from doom_learning.common import OUT,save_json,digest
+from connectome_sim.physiology.common import OUT,save_json,digest
 
 
 def run(out,eta=.05,revision='v4',cue_names=('vertical','horizontal')):

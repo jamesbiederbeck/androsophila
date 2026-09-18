@@ -3,9 +3,9 @@ import ctypes as C
 import hashlib,json,math,subprocess,sys,time
 from pathlib import Path
 import numpy as np
-from doom.native import NativeBrain
-from .common import ROOT, GRAPH, OUT, digest, save_json
-from .circuit import identify
+from connectome_sim.native import NativeBrain
+from connectome_sim.physiology.common import ROOT, GRAPH, OUT, digest, save_json
+from connectome_sim.physiology.circuit import identify
 
 SOURCE=Path(__file__).with_name('kernel.cpp')
 LIBRARY=OUT/('libmemory.dylib' if sys.platform=='darwin' else 'libmemory.so')
