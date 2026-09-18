@@ -4,32 +4,27 @@ Mirrors doom/game.py's Game class shape (pixels()/act()/observation()/close()/
 new_episode()) so flappy/play.py can drive the same Brain/NativeBrain/GPUBrain
 without any game-specific code outside this module and vision/retina.py.
 
-A pipe pair in this game is really a hurdle, not a gate: the bird's x
-position is fixed (`_player_x` never changes), so there is nothing to
-dodge sideways, and it clears an obstacle the same way a hurdler does --
-by gaining enough height, not by picking a lane. The stock sprite renders
-the lower pipe as a narrow 52px column with open sky on both flanks, which
-looks to a bilinear-sampled retina like a post with a way around it -- an
-affordance the bird does not have. `pixels()` projects only the *lower*
-pipe as a full-frame-width bar running from the ground up to the gap's
-bottom edge (the hurdle height): solid across all of x, exactly the bar a
-hurdler clears from below, infinitely wide because there is no lateral
-axis to be finite in. The upper pipe is deliberately left unprojected --
-a hurdle has no ceiling above the runner, and drawing one would reintroduce
-the wrong intuition (squeezing through a slot) this change is meant to
-remove. The upper pipe still exists in the underlying env and can still
-end the episode on collision; only its *rendering* is skipped, so flying
-too high remains just as fatal as before, it's simply not drawn as an
-obstacle. This changes what is rendered for both the neural visual input
-and the human broadcast view (they are always the same frame in this repo,
-matching doom/game.py's convention) -- game physics, scoring and collision
-are untouched; only the picture is reshaped to fit the bird's actual
-constraints.
+`pixels()` does not return the game's own side-on frame. It returns the
+world reprojected into the bird's first-person view (flappy/render3d.py):
+each pipe becomes a wall standing on the ground, spanning the full lateral
+axis and rising to the gap's lower edge -- a hurdle crossing the view
+horizontally, placed by distance rather than by screen position. See that
+module for why the shipped camera's picture misrepresents what the bird can
+actually do about an obstacle.
+
+Only the *lower* pipe is projected: a hurdle has no ceiling above the
+runner. The upper pipe still exists in the env and still ends the episode
+on collision -- flying too high remains exactly as fatal -- it is simply
+not drawn as an obstacle. Game physics, scoring and collision are untouched
+throughout; only the picture changes, for both the neural visual input and
+the human broadcast view (always the same frame here, matching
+doom/game.py's convention).
 """
 import numpy as np
 import pygame
-from flappy_bird_gymnasium.envs.constants import PIPE_WIDTH, PLAYER_HEIGHT, PLAYER_WIDTH
+from flappy_bird_gymnasium.envs.constants import PIPE_VEL_X, PLAYER_HEIGHT, PLAYER_WIDTH
 from flappy_bird_gymnasium.envs.flappy_bird_env import FlappyBirdEnv
+from flappy.render3d import MIN_DEPTH, render
 
 # The env's only declared tick-rate signal (metadata['render_fps']); not
 # enforced by the env itself unless render_mode='human', so this is a chosen
@@ -39,7 +34,7 @@ FPS = 30
 
 
 class Game:
-    def __init__(self, seed=41027, score_limit=None, no_pipes=False, wall_pipes=True):
+    def __init__(self, seed=41027, score_limit=None, no_pipes=False, perspective=True):
         self.env = FlappyBirdEnv(render_mode='rgb_array', use_lidar=False, score_limit=score_limit)
         if no_pipes:
             # Park every generated pipe far off both the visible screen and
@@ -48,8 +43,9 @@ class Game:
             # Ground/ceiling boundaries are untouched and still terminate an
             # episode; only the pipe obstacle is removed.
             self.env._get_random_pipe = lambda: [{'x': -9999, 'y': -9999}, {'x': -9999, 'y': -9999}]
-        self._wall_pipes = wall_pipes
-        self._pipe_wall_color = None
+        self._no_pipes = no_pipes
+        self._perspective = perspective
+        self._colors = None
         self._seed = seed
         self.episode = 0
         self.new_episode()
@@ -67,33 +63,37 @@ class Game:
 
     def pixels(self):
         if self._finished: raise RuntimeError('Episode finished; reset is required')
-        frame = self._frame.copy()
-        if self._wall_pipes:
-            hurdle_top = self._hurdle_height()
-            if hurdle_top is not None:
-                ground_y = int(self.env._ground['y'])
-                if hurdle_top < ground_y: frame[hurdle_top:ground_y, :] = self._pipe_color()
-        return frame
-
-    def _hurdle_height(self):
-        """Pixel row of the top edge of the nearest unpassed, on-screen
-        lower pipe -- the hurdle bar the bird must clear from below. None
-        if no such pipe exists (matches no_pipes and the brief window
-        before the first pipe scrolls into view)."""
+        if not self._perspective: return self._frame.copy()
         env = self.env
-        pairs = [(u, l) for u, l in zip(env._upper_pipes, env._lower_pipes)
-                 if u['x'] < env._screen_width and u['x'] + PIPE_WIDTH > env._player_x]
-        if not pairs: return None
-        _, l = min(pairs, key=lambda pair: pair[0]['x'])
-        return int(np.clip(l['y'], 0, env._screen_height))
+        return render((env._screen_height, env._screen_width),
+                      float(env._player_y) + PLAYER_HEIGHT / 2, float(env._ground['y']),
+                      self._hurdles(), self.tick * abs(PIPE_VEL_X), self._palette())
 
-    def _pipe_color(self):
-        # Sampled once from the loaded sprite (not hardcoded) so this tracks
-        # whatever --pipe-color the env was constructed with.
-        if self._pipe_wall_color is None:
-            sprite = pygame.surfarray.array3d(self.env._images['pipe'][0])
-            self._pipe_wall_color = sprite[sprite.shape[0] // 2, sprite.shape[1] // 2].astype(np.uint8)
-        return self._pipe_wall_color
+    def _hurdles(self):
+        """(depth ahead, top edge y) for every lower pipe still in front of
+        the bird -- the walls it has to clear."""
+        # reset() keeps its own x values for the opening pipes and only takes
+        # y from _get_random_pipe, so the no_pipes parking trick leaves them
+        # at real depths with a sentinel height -- which would project as a
+        # wall taller than the world. There is nothing to clear; say so.
+        if self._no_pipes: return []
+        player_x = self.env._player_x
+        return [(float(pipe['x']) - player_x, float(pipe['y'])) for pipe in self.env._lower_pipes
+                if float(pipe['x']) - player_x >= MIN_DEPTH]
+
+    def _palette(self):
+        # Sampled once from the game's own sprites and background rather than
+        # hardcoded, so the view tracks whatever colors the env was built with.
+        if self._colors is None:
+            pipe = pygame.surfarray.array3d(self.env._images['pipe'][0])
+            ground = self._frame[min(int(self.env._ground['y']) + 20, self._frame.shape[0] - 1), 5]
+            self._colors = {
+                'sky': self._frame[0, 0].astype(np.uint8),
+                'hurdle': pipe[pipe.shape[0] // 2, pipe.shape[1] // 2].astype(np.uint8),
+                'ground': ground.astype(np.uint8),
+                'stripe': (ground * .82).astype(np.uint8),
+            }
+        return self._colors
 
     def act(self, flap):
         # The adapter is the only caller of env.step. No human keystrokes.

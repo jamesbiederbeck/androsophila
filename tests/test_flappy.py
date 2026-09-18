@@ -47,47 +47,63 @@ def test_game_pixels_and_act_advance_tick_deterministically():
         g.close()
 
 
-def test_lower_pipe_is_projected_as_a_full_width_hurdle():
+def test_pixels_are_the_first_person_view_not_the_game_camera():
     from flappy.game import Game
     g = Game(seed=41027)
     try:
-        for _ in range(60):
-            g.act(False)
-            if g.observation()['finished']:
-                g.new_episode()
-        hurdle_top = g._hurdle_height()
-        assert hurdle_top is not None
+        for t in range(18):
+            g.act(t % 6 == 0)
         frame = g.pixels()
-        color = g._pipe_color()
-        ground_y = int(g.env._ground['y'])
-        # solid, full-width, single-color bar from the hurdle height to the ground
-        np.testing.assert_array_equal(frame[hurdle_top], np.tile(color, (frame.shape[1], 1)))
-        np.testing.assert_array_equal(frame[ground_y - 1], np.tile(color, (frame.shape[1], 1)))
-        # above the hurdle is untouched (no ceiling band -- a hurdle has none)
-        assert not np.array_equal(frame[max(hurdle_top - 5, 0), 0], color)
+        assert frame.shape == (512, 288, 3)
+        # every row is one flat color across: the world here is only ground,
+        # sky and laterally-infinite walls, none of which vary left to right
+        for row in range(0, 512, 32):
+            assert len(np.unique(frame[row], axis=0)) == 1, row
+        assert not np.array_equal(frame, g._frame)  # not the side-on frame
     finally:
         g.close()
 
 
-def test_wall_pipes_can_be_disabled_to_get_the_raw_frame():
+def test_hurdles_are_the_lower_pipes_ahead_of_the_bird():
     from flappy.game import Game
-    g = Game(seed=41027, wall_pipes=False)
+    g = Game(seed=41027)
     try:
-        for _ in range(60):
+        for _ in range(20):
             g.act(False)
-            if g.observation()['finished']:
-                g.new_episode()
+        hurdles = g._hurdles()
+        assert hurdles
+        assert all(depth > 0 for depth, _ in hurdles)  # only what is still ahead
+        tops = {top for _, top in hurdles}
+        assert tops == {float(p['y']) for p in g.env._lower_pipes
+                        if float(p['x']) - g.env._player_x > 0}
+        # approaching: every wall gets nearer as the bird flies on
+        before = sorted(d for d, _ in hurdles)
+        g.act(False)
+        assert sorted(d for d, _ in g._hurdles())[0] < before[0]
+    finally:
+        g.close()
+
+
+def test_perspective_can_be_disabled_to_get_the_raw_game_frame():
+    from flappy.game import Game
+    g = Game(seed=41027, perspective=False)
+    try:
+        for _ in range(20):
+            g.act(False)
         np.testing.assert_array_equal(g.pixels(), g._frame)
     finally:
         g.close()
 
 
-def test_no_pipes_leaves_wall_projection_a_no_op():
+def test_no_pipes_leaves_an_empty_world_to_fly_through():
     from flappy.game import Game
     g = Game(seed=41027, no_pipes=True)
     try:
-        assert g._hurdle_height() is None
-        np.testing.assert_array_equal(g.pixels(), g._frame)
+        assert g._hurdles() == []
+        frame = g.pixels()
+        # sky above the horizon, ground below, no wall anywhere
+        assert len(np.unique(frame[:256].reshape(-1, 3), axis=0)) == 1
+        assert not np.array_equal(frame[300, 0], frame[0, 0])
     finally:
         g.close()
 
