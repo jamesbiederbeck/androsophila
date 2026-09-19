@@ -29,6 +29,20 @@ The wiring comes from a biological reconstruction. The dynamics, retinal interfa
 | `docs/`, `outputs/`, `connectome_sim/data-provenance/` | Scientific reviews, compact evidence, source snapshots and dataset hashes |
 | `deploy/doomfly/` | Prepared container and deployment instructions |
 
+## Where to run this from
+
+Every command here runs from the **repository root** — the directory holding
+`connectome_sim/`, not from inside it and not from the parent.
+
+The engine resolves its paths relative to the consuming repo, not to its own
+checkout: `connectome_sim/prepare.py` takes `parents[1]` and
+`connectome_sim/physiology/common.py` takes `parents[2]`, and both land on this
+repo's root. So `connectome_data/` is read from here and
+`outputs/connectome_sim/` is written here. Run from anywhere else and the paths
+resolve outside the checkout, usually to a `FileNotFoundError` naming a
+directory one level up. `python -m ...` also needs the root on `sys.path`,
+which is what running from there gives you.
+
 ## Run the neural experiment
 
 Use Python 3.11 and a C++ compiler. The full graph needs several GB of RAM and downloaded data; it does not run inside a browser or an edge function. Use the pinned neural requirements below.
