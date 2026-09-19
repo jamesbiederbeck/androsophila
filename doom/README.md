@@ -12,7 +12,7 @@ emulation or a trained Doom player. The fixed visual-neuron BCI turns, moves and
 fires in ViZDoom. A comprehensive review found and corrected a refractory-event
 error; old kill counts are legacy results, not validation of the current model.
 See [the neuroscience review](../docs/doom-neuroscience-review.md) and
-`outputs/doom/audit/experiments.json` for matched controls and scientific limits.
+`outputs/connectome_sim/audit/experiments.json` for matched controls and scientific limits.
 These checks do not establish skill, learning, or natural motor semantics. The biological-role
 comparison (DNa02, DNp09, MDN, MN9) remains silent in the initial visual test.
 

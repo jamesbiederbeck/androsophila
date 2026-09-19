@@ -31,7 +31,7 @@ def run(capture_path, dataset):
     cap = np.load(capture_path)
     lights, steps = cap['lights'], cap['steps']
     ticks = len(steps)
-    path = ROOT / 'outputs/doom' / dataset / 'graph.npz'
+    path = ROOT / 'outputs/connectome_sim' / dataset / 'graph.npz'
     native, native_total, native_step_ms, native_wall = run_backend(NativeBrain, path, lights, steps)
     gpu, gpu_total, gpu_step_ms, gpu_wall = run_backend(GPUBrain, path, lights, steps)
     mismatch = native_total != gpu_total

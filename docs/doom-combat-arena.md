@@ -89,7 +89,7 @@ Exact WAD hashes, seed outcomes and limits are in `/arena-circling-review.json`.
 The probe and paired evidence are included in the downloadable source archive.
 
 The final v1 state, source assets, audit logs and final neural checkpoint were
-preserved under `outputs/doom/circling-review` and `outputs/doom/spectator-v1`.
+preserved under `outputs/connectome_sim/circling-review` and `outputs/connectome_sim/spectator-v1`.
 Switching revisions interrupts and censors the old unfinished round. V2 starts a
 fresh identified baseline and fresh neural state, with its own audit/checkpoint
 directory; incompatible checkpoints are not imported. Natural deaths within v2

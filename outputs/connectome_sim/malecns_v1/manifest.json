@@ -1,5 +1,6 @@
 {
   "dataset": "malecns_v1",
+  "projection": "viewport",
   "neurons": 166700,
   "edges": 25582938,
   "synaptic_contacts": 124177617,
@@ -9,6 +10,18 @@
   "projection_confidence_median": 1.0,
   "projection_below_80_percent": 15,
   "readouts": [
+    {
+      "index": 48,
+      "id": "10059",
+      "type": "DNp20",
+      "side": "R"
+    },
+    {
+      "index": 146,
+      "id": "10162",
+      "type": "DNp20",
+      "side": "L"
+    },
     {
       "index": 306,
       "id": "10331",
@@ -20,6 +33,12 @@
       "id": "10360",
       "type": "DNa02",
       "side": "R"
+    },
+    {
+      "index": 489,
+      "id": "10527",
+      "type": "DNpe017",
+      "side": "L"
     },
     {
       "index": 706,
@@ -70,24 +89,6 @@
       "side": "L"
     },
     {
-      "index": 48,
-      "id": "10059",
-      "type": "DNp20",
-      "side": "R"
-    },
-    {
-      "index": 146,
-      "id": "10162",
-      "type": "DNp20",
-      "side": "L"
-    },
-    {
-      "index": 489,
-      "id": "10527",
-      "type": "DNpe017",
-      "side": "L"
-    },
-    {
       "index": 142493,
       "id": "555871",
       "type": "DNpe017",
@@ -114,6 +115,6 @@
   "uncertain_sign_neurons": 3718,
   "retina_model": "R1-R6 luminance-only. Column inferred from all contacts onto annotated L1/L2/L3; modal column. Experimental overlapping viewport projection, not calibrated retinal angles.",
   "visual_dynamics": "Photoreceptors and lamina are graded in vivo. This experiment uses an explicit LIF proxy, low-pass luminance drive and tonic lamina current; it is not validated fly vision.",
-  "motor_interface": "Experimental visual-neuron BCI: DNp20 R-L turns; DNpe017 summed rate moves forward and its spikes press attack. Chosen interface, not natural fly actions. Biological-role readouts retained as comparison.",
+  "motor_interface": "Two fixed readout modes: biological-role comparison (DNa02 turn; DNp09/MDN motion; MN9 attack) and explicit visual-neuron BCI (DNp20 R-L turns; DNpe017 summed rate moves forward; DNpe017 spikes press attack). BCI gains are chosen engineering mappings, not natural fly behaviors. No aiming, target coordinates, auto-fire, stuck recovery, or game policy.",
   "training": "No synaptic plasticity. Optional score-contingent sugar input is stimulation, not learning."
 }

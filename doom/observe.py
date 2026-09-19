@@ -46,7 +46,7 @@ def main():
         raise RuntimeError('The existing broadcaster is not running')
     # Check source provenance without loading another full neural simulation.
     files = {name: sha(ROOT / name) for name in first['provenance']['source_sha256']}
-    files['outputs/doom/malecns_v1/graph.npz'] = sha(ROOT / 'outputs/doom/malecns_v1/graph.npz')
+    files['outputs/connectome_sim/malecns_v1/graph.npz'] = sha(ROOT / 'outputs/connectome_sim/malecns_v1/graph.npz')
     save(out / 'fingerprints-start.json', files)
     started = time.time()
     began = time.monotonic()
@@ -74,7 +74,7 @@ def main():
     }
     save(out / 'protocol.json', protocol)
     save(out / 'initial-state.json', first)
-    log_path = ROOT / 'outputs/doom/audit.jsonl'
+    log_path = ROOT / 'outputs/connectome_sim/audit.jsonl'
     audit = log_path.open()
     audit.seek(0, os.SEEK_END)
     inode = os.fstat(audit.fileno()).st_ino

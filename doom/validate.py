@@ -8,7 +8,7 @@ from doom.game import Game,retinal_samples
 from connectome_sim.engine import NeuralControls
 ROOT=Path(__file__).resolve().parents[1]
 def main():
-    path=ROOT/'outputs/doom/malecns_v1/graph.npz'
+    path=ROOT/'outputs/connectome_sim/malecns_v1/graph.npz'
     manifest=json.loads((path.parent/'manifest.json').read_text())
     game=Game();frame=game.pixels();game.close()
     results=[];intact=None;zero=None
@@ -44,5 +44,5 @@ def main():
       'interpretation':'Pixels affect the retained neural model. Brightness activates mapped receptors; removing their edges changes downstream activity. The selected locomotion/mouthpart readouts remained silent. This is not evidence of successful game control, realistic vision, or learning.',
       'checks':['All retained graph counts preserved','Matched inputs for intact and disconnected conditions','Black input silences mapped photoreceptor proxy','Retinal disconnection changes neural activity','Total disconnection eliminates all activity outside directly driven cells','Total disconnection produces no selected game action'],
       'results':results}
-    (ROOT/'outputs/doom/validation.json').write_text(json.dumps(report,indent=2)+'\n')
+    (ROOT/'outputs/connectome_sim/validation.json').write_text(json.dumps(report,indent=2)+'\n')
 if __name__=='__main__':main()

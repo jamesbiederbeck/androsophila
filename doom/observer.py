@@ -11,7 +11,7 @@ from PIL import Image
 from doom.game import Game
 
 ROOT=Path(__file__).resolve().parents[1]
-ENGINE=ROOT/'outputs/doom/native-spectator-v1/engine/vizdoom'
+ENGINE=ROOT/'outputs/connectome_sim/native-spectator-v1/engine/vizdoom'
 
 class ObserverUnavailable(RuntimeError):pass
 class ObserverBusy(RuntimeError):pass

@@ -21,7 +21,7 @@ seconds between first and last completion: 1.59 state changes per second.
 Median curl request duration was 277 ms (range 201–489 ms). Median frame age
 at reception was 258 ms, maximum 1751 ms. Curl was launched separately per
 request, with a 150 ms pause; this does not measure browser paint FPS or model
-the browser's connection reuse exactly. Evidence: `outputs/doom/performance-20260905/public-delivery.json`.
+the browser's connection reuse exactly. Evidence: `outputs/connectome_sim/performance-20260905/public-delivery.json`.
 
 ## Bottlenecks
 
@@ -57,7 +57,7 @@ All eight output arrays had identical SHA-256 hashes across configurations.
 This isolates a large overhead in that transform; it does not imply the
 whole brain or broadcast will speed up by the same factor. These were JPEG
 test inputs, not a replay of the exact original raw RGB sensory stream.
-Evidence: `outputs/doom/performance-20260905/retina-threading.json`.
+Evidence: `outputs/connectome_sim/performance-20260905/retina-threading.json`.
 
 After preserving the baseline, benchmark the launcher in a separate run,
 record thread configuration, compare neural traces, and measure stage-level
@@ -111,5 +111,5 @@ A later 20.23-second local-source sample advanced 13.40 neural seconds:
 0.662× speed and 8.10 published source frames per wall second. This is a short
 sample on a shared host, not a controlled before/after experiment or browser
 paint FPS. It does not establish 30/60 FPS. Raw samples and the restart record
-are in `outputs/doom/performance-20260905/post-restart-sample.json` and
+are in `outputs/connectome_sim/performance-20260905/post-restart-sample.json` and
 `post-observation-restart.json`.

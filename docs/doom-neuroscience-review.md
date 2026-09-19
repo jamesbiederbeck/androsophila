@@ -69,7 +69,7 @@ The separate female dataset is BANC materialization 888, detector v2. It is
 the preparation code refuses to substitute the male map. This review verifies
 the active male graph; it is not a new full re-audit of the female import.
 
-Evidence: `outputs/doom/audit/data-integrity.json`,
+Evidence: `outputs/connectome_sim/audit/data-integrity.json`,
 `official-source-check.json`, `retinal-projection.json`, `doom/audit_data.py`,
 `doom/audit_retina.py`, and `doom/audit_remote.py`.
 
@@ -273,7 +273,7 @@ origin; the website itself does not execute the full graph in visitors' browsers
 
 ## 8. Evidence from this review
 
-The machine-readable results are in `outputs/doom/audit/experiments.json`.
+The machine-readable results are in `outputs/connectome_sim/audit/experiments.json`.
 They include eight matched, fixed-frame conditions at the production sensory
 cadence, followed by three game seeds under intact vision, black input, and
 clamped controls. Each closed-loop trial lasts six simulated seconds. The

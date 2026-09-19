@@ -15,6 +15,6 @@ def main():
             for block in iter(lambda:f.read(8*1024**2),b''):h.update(block)
         assert base64.b64encode(h.digest()).decode()==md5 and size==(root/name).stat().st_size
         results[name]={'url':info['url'],'remote_md5_base64':md5,'bytes':size,'matched':True}
-    (ROOT/'outputs/doom/audit/official-source-check.json').write_text(json.dumps(results,indent=2)+'\n')
+    (ROOT/'outputs/connectome_sim/audit/official-source-check.json').write_text(json.dumps(results,indent=2)+'\n')
     print('All three local files match the official GCS object MD5 and size.')
 if __name__=='__main__':main()

@@ -175,7 +175,7 @@ def main():
     start_hash = json.loads((out / 'fingerprints-start.json').read_text())
     end_hash = json.loads((out / 'fingerprints-end.json').read_text())
     source_match = all(start_hash[k] == v for k, v in initial['provenance']['source_sha256'].items())
-    graph_match = start_hash['outputs/doom/malecns_v1/graph.npz'] == initial['provenance']['graph_sha256']
+    graph_match = start_hash['outputs/connectome_sim/malecns_v1/graph.npz'] == initial['provenance']['graph_sha256']
     public = list(records(out / 'public-curl-checks.jsonl'))
     errors = list(records(out / 'errors.jsonl'))
     known_kills = sum(e['kills'] for e in episodes) - initial['game']['kills']

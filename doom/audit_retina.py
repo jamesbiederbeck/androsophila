@@ -10,7 +10,7 @@ import pyarrow.ipc as ipc
 ROOT=Path(__file__).resolve().parents[1]
 def main():
     root=ROOT/'connectome_data/malecns_v1'
-    graph=np.load(ROOT/'outputs/doom/malecns_v1/graph.npz')
+    graph=np.load(ROOT/'outputs/connectome_sim/malecns_v1/graph.npz')
     ids=graph['ids']
     a=feather.read_table(root/'annotations.feather').to_pandas().set_index('bodyId').loc[ids]
     receptor=a.type.eq('R1-R6').to_numpy()
@@ -48,6 +48,6 @@ def main():
       'left':int((sides=='L').sum()),'right':int((sides=='R').sum()),
       'confidence_below_point8':int((confidence<.8).sum()),'cross_side_anchor_edges':cross_side,
       'side_annotation_fields':'receptor rootSide, anchor somaSide','anchor_side_pairs':{str(k):v for k,v in pairs.items()},'algorithm_matches':True,'optically_calibrated':False}
-    (ROOT/'outputs/doom/audit/retinal-projection.json').write_text(json.dumps(report,indent=2)+'\n')
+    (ROOT/'outputs/connectome_sim/audit/retinal-projection.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report))
 if __name__=='__main__':main()

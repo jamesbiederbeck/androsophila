@@ -99,14 +99,14 @@ interface. The experiment exposes its wiring, activity and validation limits.”
 
 ## Evidence
 
-- [Machine-readable analysis](../outputs/doom/qa-hour-20260905T2047Z/analysis.json)
-- [Observation figure](../outputs/doom/qa-hour-20260905T2047Z/observation.png)
-  and [PDF](../outputs/doom/qa-hour-20260905T2047Z/observation.pdf)
-- [Timeseries CSV](../outputs/doom/qa-hour-20260905T2047Z/timeseries.csv)
-  and [episode CSV](../outputs/doom/qa-hour-20260905T2047Z/episodes.csv)
-- [Protocol](../outputs/doom/qa-hour-20260905T2047Z/protocol.json),
-  [completion record](../outputs/doom/qa-hour-20260905T2047Z/complete.json),
-  [amendments](../outputs/doom/qa-hour-20260905T2047Z/amendments.jsonl)
+- [Machine-readable analysis](../outputs/connectome_sim/qa-hour-20260905T2047Z/analysis.json)
+- [Observation figure](../outputs/connectome_sim/qa-hour-20260905T2047Z/observation.png)
+  and [PDF](../outputs/connectome_sim/qa-hour-20260905T2047Z/observation.pdf)
+- [Timeseries CSV](../outputs/connectome_sim/qa-hour-20260905T2047Z/timeseries.csv)
+  and [episode CSV](../outputs/connectome_sim/qa-hour-20260905T2047Z/episodes.csv)
+- [Protocol](../outputs/connectome_sim/qa-hour-20260905T2047Z/protocol.json),
+  [completion record](../outputs/connectome_sim/qa-hour-20260905T2047Z/complete.json),
+  [amendments](../outputs/connectome_sim/qa-hour-20260905T2047Z/amendments.jsonl)
 - [Comprehensive implementation audit](doom-neuroscience-review.md)
 
 The figure and exported data were generated from the completed recording. The

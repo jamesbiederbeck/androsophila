@@ -7,7 +7,7 @@ from doom.game import Game,retinal_samples
 from connectome_sim.engine import NeuralControls
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- m=json.loads((ROOT/'outputs/doom/malecns_v1/manifest.json').read_text());path=ROOT/'outputs/doom/malecns_v1/graph.npz'
+ m=json.loads((ROOT/'outputs/connectome_sim/malecns_v1/manifest.json').read_text());path=ROOT/'outputs/connectome_sim/malecns_v1/graph.npz'
  game=Game();frame=game.pixels();game.close();trials=[]
  for condition in ['intact','blank_vision','retina_disconnected','all_edges_disconnected']:
   b=NativeBrain(path);d=NeuralControls(m['readouts'],mode='bci');light=retinal_samples(frame,b.uv)
@@ -33,5 +33,5 @@ def main():
  report={'passed':True,'biologically_validated':False,'learning_demonstrated':False,'decoder':'engineered visual-neuron BCI',
  'interpretation':'The fixed BCI receives only activity of retained descending neurons. Black pixels and retinal disconnection change its output; disconnecting every edge abolishes it. This validates the implemented causal loop, not biological motor semantics, realistic vision, or learned game skill.',
  'trials':trials,'closed_loop':{'game_tics':210,'neural_seconds':b.sim_ms/1000,'wall_seconds':round(time.monotonic()-start,3),'action_tics':actions,'spikes':spikes,'kills':total_kills+game.observation()['kills'],'samples':events}}
- (ROOT/'outputs/doom/bci-validation.json').write_text(json.dumps(report,indent=2)+'\n');game.close()
+ (ROOT/'outputs/connectome_sim/bci-validation.json').write_text(json.dumps(report,indent=2)+'\n');game.close()
 if __name__=='__main__':main()

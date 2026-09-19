@@ -32,7 +32,7 @@ ordering guarantees kernel 1 completes before kernel 2 starts):
 2. **`lif_deliver_scatter`** — event-driven: reads the *current* slot's
    queued spike count directly from device memory (no host sync) and
    grid-strides one warp per queued spiking neuron over the graph's native
-   **pre-major** CSR (`doom/prepare.py`'s `ptr`/`post`/`weight` exactly as
+   **pre-major** CSR (`connectome_sim/prepare.py`'s `ptr`/`post`/`weight` exactly as
    produced — no transpose needed, unlike the dense designs' post-major
    gather layout), scattering `atomicAdd(&g[post[e]], weight[e])` into each
    destination, guarded by that destination's (already-updated-this-substep)
@@ -73,7 +73,7 @@ small scale — `pytest tests/test_doom_reference.py -q`: 6 passed.
 initial state on the real 166,700-neuron/25.58M-edge graph, fed an
 identical synthetic luminance sequence:
 
-- 10 ticks (`outputs/doom/gpu-benchmark-20260916/validation-event-driven-10tick.json`):
+- 10 ticks (`outputs/connectome_sim/gpu-benchmark-20260916/validation-event-driven-10tick.json`):
   1,129/166,700 neurons (0.68%) mismatched by tick 10, first mismatch at
   tick 3. Total spikes: 178,382 native vs. 178,333 gpu.
 - 200 ticks (`.../validation-event-driven-200tick.json`): 4,829/166,700
@@ -118,7 +118,7 @@ backends were benchmarked on the identical standalone harness/workload:
 
 | backend | harness | tics/sec | median step wall |
 |---|---|---|---|
-| `NativeBrain` (`outputs/doom/gpu-benchmark-20260916/benchmark-native-standalone.json`) | standalone, synthetic luminance, no server/game | 18.347 | 53.5 ms |
+| `NativeBrain` (`outputs/connectome_sim/gpu-benchmark-20260916/benchmark-native-standalone.json`) | standalone, synthetic luminance, no server/game | 18.347 | 53.5 ms |
 | `GPUBrain`, event-driven (`.../benchmark-event-driven.json`) | standalone, synthetic luminance, no server/game | **65.094** | 14.9 ms |
 
 **~3.5x faster on this identical harness.** This is the number that's
@@ -145,13 +145,13 @@ section, not left as a guess.
 does: `NativeBrain` makes real decisions via `NeuralControls`, and those
 actions genuinely change what the game shows next. The per-tick captured
 light array and substep count are saved
-(`outputs/doom/gpu-benchmark-20260916/organic-capture-combat_survival.npz`,
+(`outputs/connectome_sim/gpu-benchmark-20260916/organic-capture-combat_survival.npz`,
 86% of retina samples nonzero on average — this scenario is not a dark
 level). `doom/replay_organic_workload.py` then replays that identical
 sequence into fresh `NativeBrain` and `GPUBrain` instances from identical
 initial state — same fairness principle as `doom/validate_gpu.py`, just
 with correlated, closed-loop-derived input instead of i.i.d. uniform noise
-(`outputs/doom/gpu-benchmark-20260916/organic-replay-report.json`):
+(`outputs/connectome_sim/gpu-benchmark-20260916/organic-replay-report.json`):
 
 | | tics/sec | median step wall |
 |---|---|---|
@@ -215,7 +215,7 @@ no longer applies to this design; it's retired here, not extended.
 
 See also: `docs/doom-performance-review.md` (the CPU-side investigation this
 work followed up on), `doom/gpu_attempts/README.md` (the three superseded
-dense-every-substep designs and their numbers), `outputs/doom/gpu-benchmark-20260916/`
+dense-every-substep designs and their numbers), `outputs/connectome_sim/gpu-benchmark-20260916/`
 (all raw benchmark/validation JSON, including the three dense-design files
 from the prior round, this round's `benchmark-event-driven.json`,
 `benchmark-native-standalone.json`, `validation-event-driven-10tick.json`,

@@ -6,7 +6,7 @@ from connectome_sim.native import NativeBrain, BUILD
 from doom.game import Game, retinal_samples
 from connectome_sim.engine import NeuralControls
 ROOT=Path(__file__).resolve().parents[1]
-PATH=ROOT/'outputs/doom/malecns_v1/graph.npz'
+PATH=ROOT/'outputs/connectome_sim/malecns_v1/graph.npz'
 M=json.loads((PATH.parent/'manifest.json').read_text())
 def sha(a): return hashlib.sha256(a.tobytes()).hexdigest()
 def buttons(a): return {k:a[k] for k in ['turn','forward','attack']}
@@ -62,8 +62,8 @@ def main():
           'wall_seconds':time.monotonic()-start,'weights_unchanged':True}
         loops.append(result);print(json.dumps(result),flush=True);game.close();del b;gc.collect()
     report={'created_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'build':BUILD,'assets':assets,
-      'data_audit_sha256':hashlib.sha256((ROOT/'outputs/doom/audit/data-integrity.json').read_bytes()).hexdigest(),
+      'data_audit_sha256':hashlib.sha256((ROOT/'outputs/connectome_sim/audit/data-integrity.json').read_bytes()).hexdigest(),
       'fixed_frame_tests':results,'closed_loop_trials':loops,'biologically_validated':False,'learning_demonstrated':False,
       'limits':'Three game seeds, one reconstruction, six seconds each; descriptive checks, not a skill or learning benchmark. Fixed frame interventions use the production 35-Hz input cadence.'}
-    (ROOT/'outputs/doom/audit/experiments.json').write_text(json.dumps(report,indent=2)+'\n')
+    (ROOT/'outputs/connectome_sim/audit/experiments.json').write_text(json.dumps(report,indent=2)+'\n')
 if __name__=='__main__':main()

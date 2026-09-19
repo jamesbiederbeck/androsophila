@@ -2,7 +2,7 @@
 
 Research checked 5 September 2026. This is a targeted prior-art review, not an
 exhaustive novelty search or independent experimental replication of other work.
-The ongoing hour is defined in `outputs/doom/qa-hour-20260905T2047Z/protocol.json`.
+The ongoing hour is defined in `outputs/connectome_sim/qa-hour-20260905T2047Z/protocol.json`.
 No result from an incomplete observation should be presented as a final result.
 
 ## Relevant primary sources
@@ -55,7 +55,7 @@ The new hour must not erase or replace these results with a more favorable clip.
 Wait for the collector's `complete.json`, then run:
 
 ```sh
-.venv-qa/bin/python -m doom.analyze_observation --out outputs/doom/qa-hour-20260905T2047Z
+.venv-qa/bin/python -m doom.analyze_observation --out outputs/connectome_sim/qa-hour-20260905T2047Z
 ```
 
 The isolated `.venv-qa` provides plotting without altering the active simulation's

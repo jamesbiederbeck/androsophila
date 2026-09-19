@@ -20,7 +20,7 @@ binary="$build_root/build-observer/bin/vizdoom"
 if [ -f "$build_root/build-observer/bin/vizdoom.app/Contents/MacOS/vizdoom" ]; then
  binary="$build_root/build-observer/bin/vizdoom.app/Contents/MacOS/vizdoom"
 fi
-destination="$root/outputs/doom/native-spectator-v1/engine"
+destination="$root/outputs/connectome_sim/native-spectator-v1/engine"
 mkdir -p "$destination"
 cp "$binary" "$destination/vizdoom.next"
 mv "$destination/vizdoom.next" "$destination/vizdoom"

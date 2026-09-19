@@ -29,7 +29,7 @@ from connectome_sim.mjpeg import encoded_frame  # noqa: F401 -- re-exported for 
 def run_loop(args):
     global latest,observer
     try:
-        manifest=json.loads((ROOT/'outputs/doom/malecns_v1/manifest.json').read_text())
+        manifest=json.loads((ROOT/'outputs/connectome_sim/malecns_v1/manifest.json').read_text())
         training=None
         if args.model=='experimental-v6':
             from connectome_sim.physiology.calibration import calibrated_brain
@@ -42,11 +42,11 @@ def run_loop(args):
             manifest['additional_R8_inputs']=len(brain.r8);build=BUILD
         elif args.backend=='gpu':
             from connectome_sim.gpu import GPUBrain,GPU_BUILD
-            brain=GPUBrain(ROOT/'outputs/doom/malecns_v1/graph.npz');build=GPU_BUILD
-        else:brain=NativeBrain(ROOT/'outputs/doom/malecns_v1/graph.npz');build=BUILD
+            brain=GPUBrain(ROOT/'outputs/connectome_sim/malecns_v1/graph.npz');build=GPU_BUILD
+        else:brain=NativeBrain(ROOT/'outputs/connectome_sim/malecns_v1/graph.npz');build=BUILD
         phase=('training' if args.learning else 'frozen-control') if training else 'baseline'
         controls=NeuralControls(manifest['readouts'],mode=args.decoder);game=Game(seed=args.seed,scenario=args.scenario,spectator=True)
-        origin=provenance(ROOT/'outputs/doom/malecns_v1/graph.npz',build,game.assets)
+        origin=provenance(ROOT/'outputs/connectome_sim/malecns_v1/graph.npz',build,game.assets)
         if training:
             origin['candidate']=candidate_provenance(brain,ROOT)
             origin['model_revision']='adaptive-centered-v6-live-v1'
@@ -244,7 +244,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--port',type=int,default=8766)
     p.add_argument('--decoder',choices=['biological','bci'],default='bci')
     p.add_argument('--scenario',choices=['combat_survival','defend_the_center'],default='combat_survival')
-    p.add_argument('--audit-dir',default=str(ROOT/'outputs/doom'))
+    p.add_argument('--audit-dir',default=str(ROOT/'outputs/connectome_sim'))
     p.add_argument('--bind',default='127.0.0.1')
     p.add_argument('--checkpoint-dir');p.add_argument('--resume',action='store_true')
     p.add_argument('--checkpoint-seconds',type=int,default=300)

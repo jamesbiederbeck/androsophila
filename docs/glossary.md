@@ -6,7 +6,7 @@ and where they come from in the code.
 ## Connectome / data terms
 
 - **UV** — each simulated photoreceptor's 2D coordinate in `[0,1]²`, stored per-cell in
-  the `.npz` graph (`doom/prepare.py`). Derived from real reconstructed receptor
+  the `.npz` graph (`connectome_sim/prepare.py`). Derived from real reconstructed receptor
   positions via connectome contact analysis, so it's genuinely *retinotopic* (tied to
   actual eye geometry) — but the screen mapping that samples `uv` against a game frame
   (`retinal_samples` in `doom/game.py`) is an explicit convention (left/right
@@ -33,7 +33,7 @@ and where they come from in the code.
   (`retina` array); driven by `retinal_samples`, a Naka-Rushton-style saturating
   luminance transform of the sampled pixel at that neuron's `uv`.
 - **Lamina** — the next visual processing layer downstream of the retina
-  (`doom/prepare.py` flags cell types `L1, L2, L3, L5`). Real lamina neurons are
+  (`connectome_sim/prepare.py` flags cell types `L1, L2, L3, L5`). Real lamina neurons are
   graded (non-spiking); this repo's LIF proxy can't represent that, so it's
   approximated as a constant tonic "bias" current (`lamina_bias`, default 12
   mV-equivalent) injected into those cells whenever the sim is stepped — a declared

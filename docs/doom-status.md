@@ -6,7 +6,7 @@ Published version 3, source be03f5db93595298393e578d285d2dcfc4d5915d.
 Anonymous HTTP checks returned 200 for the page and live feed. Two public
 samples advanced from sequence 437 to 448, changed the actual input-frame hash,
 and were under 500 ms old. Public WebMCP readback reported live BCI controls.
-Verification is recorded in outputs/doom/public-verification.json. The local
+Verification is recorded in outputs/connectome_sim/public-verification.json. The local
 development preview was stopped; the intended broadcaster and tunnel remain
 running. At verification the simulation/wall-time ratio was 0.158.
 
@@ -20,7 +20,7 @@ three kills in one trial, taking 16.994 wall seconds on this host. Blacking out
 pixels and disconnecting retinal outputs changed controls. Disconnecting every
 edge abolished controls. Matched inputs were hashed. Seven focused neural/game
 tests passed, including native-kernel comparison against the dense reference.
-See outputs/doom/bci-validation.json and tests/test_doom.py.
+See outputs/connectome_sim/bci-validation.json and tests/test_doom.py.
 
 The original biological-role comparison (DNa02/DNp09/MDN/MN9) remains visible;
 it produced zero actions under the initial visual conditions. The BCI uses four

@@ -29,8 +29,8 @@ from doom.game import Game, retinal_samples
 ROOT = Path(__file__).resolve().parents[1]
 
 def capture(ticks, dataset, scenario, seed, decoder):
-    manifest = json.loads((ROOT / 'outputs/doom' / dataset / 'manifest.json').read_text())
-    brain = NativeBrain(ROOT / 'outputs/doom' / dataset / 'graph.npz')
+    manifest = json.loads((ROOT / 'outputs/connectome_sim' / dataset / 'manifest.json').read_text())
+    brain = NativeBrain(ROOT / 'outputs/connectome_sim' / dataset / 'graph.npz')
     controls = NeuralControls(manifest['readouts'], mode=decoder)
     game = Game(seed=seed, scenario=scenario, spectator=False)
     lights, steps_list = [], []

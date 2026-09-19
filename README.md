@@ -66,12 +66,12 @@ for filename, url in registry['files'].items():
 (root / 'source.lock.json').write_text(json.dumps(locked, indent=2) + '\n')
 PY
 python -m connectome_sim.connectome malecns_v1
-python -m doom.prepare
+python -m connectome_sim.prepare
 python -m connectome_sim.audit_data
 python -m connectome_sim.build_kernel
 python -m doom.server --model experimental-v6 --learning --port 8766 \
-  --audit-dir outputs/doom/local-training \
-  --checkpoint-dir outputs/doom/local-training/checkpoints \
+  --audit-dir outputs/connectome_sim/local-training \
+  --checkpoint-dir outputs/connectome_sim/local-training/checkpoints \
   --checkpoint-seconds 300 --resume
 ```
 

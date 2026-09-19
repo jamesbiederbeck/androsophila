@@ -58,7 +58,7 @@ Three paired legacy-versus-observer engine trials, 700 ticks each at seeds 41027
 41028 and 41029, produced identical raw RGB, game observations and rewards for
 identical prescribed actions, including death/reset. These are transport/engine
 checks, not evidence of learning or biological fidelity. The retained local
-report is `outputs/doom/spectator-3d-v1/engine-equivalence.json`.
+report is `outputs/connectome_sim/spectator-3d-v1/engine-equivalence.json`.
 
 Runtime provenance hashes the observer source as well as model source. A planned
 update must stop/checkpoint the old worker, back up the completed generation,
